@@ -4,8 +4,8 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Interaktive Weiterbildung für Lehrpersonen: KI verstehen, ausprobieren, reflektieren und Unterricht gestalten.">
 <title>KI verstehen · Unterricht gestalten</title>
-<link rel="stylesheet" href="./styles.css">
-<script defer src="./app.js"></script>
+<link rel="stylesheet" href="./styles.css?v=fd72b59abb27">
+<script defer src="./app.js?v=0a83c10b516e"></script>
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt</a>
@@ -15,7 +15,8 @@
 <div class="shell">
 <aside aria-label="Kursnavigation">
 <p class="eyebrow">Dein Lernweg</p>
-<p id="progressText" class="small"></p>
+<p id="saveStatus" class="note small" role="status" hidden></p>
+<p id="progressText" class="small" role="status"></p>
 <progress id="progress" max="8" value="0" aria-label="Bearbeitete Kapitel"></progress>
 <div class="mobile-chapters"><label for="chapterSelect">Kapitel wählen</label><select id="chapterSelect"></select></div>
 <nav id="nav" aria-label="Kapitel"></nav>

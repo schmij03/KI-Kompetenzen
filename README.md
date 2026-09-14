@@ -26,7 +26,7 @@ Das Vorhandensein der Dateien bedeutet noch nicht, dass GitHub Pages aktiviert i
 - Kompakte Kapitelauswahl auf dem Smartphone; Materialien und Hinweise sind ausklappbar.
 - Lernziel und Sprungmarken für jedes Kapitel.
 - Gewichtsdiagramm mit markierten nächsten Nachbarn und Rückgängig-Funktion.
-- Die gewählte Gewichtsregel und der Testfall bleiben beim Kapitelwechsel erhalten.
+- Die gewählte Gewichtsregel, der Testfall, die Chat-Eingabe und die Token-Auswahl bleiben beim Kapitelwechsel innerhalb einer Sitzung erhalten.
 - Kontextabhängige, sprachlich nachvollziehbare Tokenpfade; erfundene Wahrscheinlichkeiten weiterhin ausdrücklich gekennzeichnet.
 - Drei kurze Selbsttests mit erklärendem Feedback, auch in den Druckmaterialien und im Lernjournal.
 - Eigene Gruppennamen und Zuordnungen aktualisieren die Kartenübersicht unmittelbar.
@@ -71,7 +71,8 @@ Browserdaten können gelöscht werden oder auf geteilten Geräten zugänglich bl
 
 - `index.html`: Startseite mit Einführung, Kompetenzkompass und Kapitelübersicht.
 - `lernen.html`: Grundgerüst der interaktiven Lernumgebung; direkte Kapitelwahl über `?kapitel=0` bis `?kapitel=7`.
-- `styles.css`: Darstellung, mobile Ansichten und A4-Druck.
+- `styles.css`: Darstellung der Lernumgebung, gemeinsame Grundlagen, mobile Ansichten und A4-Druck.
+- `home.css`: zusätzliche Startseiten-Gestaltung; wird nur auf der Startseite geladen.
 - `app.js`: Inhalte, Simulationen, Formulare, Export, Druckmaterialien.
 - `KONZEPT.md`: Informationsarchitektur und didaktische Entscheidungen.
 - `.nojekyll`: statische Auslieferung mit GitHub Pages.
@@ -86,10 +87,21 @@ Browserdaten können gelöscht werden oder auf geteilten Geräten zugänglich bl
 
 Die beiden Kompetenzrahmen und ihre Progressionsstufen werden nicht gleichgesetzt. Die Selbsteinschätzung 1–4 ist keine Zuordnung zu den Modellniveaus I–III.
 
+## Korrekturen und Optimierungen
+
+- Kapitelwechsel aktualisieren die URL; Neuladen sowie Browser-Zurück/Vorwärts bleiben beim passenden Kapitel.
+- Die Tab-Überschrift nennt das aktive Kapitel. Das Löschen setzt Eingaben, Simulationen und Kapitel-URL zurück.
+- Unveränderte Eingaben lösen keine zusätzlichen Schreibvorgänge aus. Speicherfehler sind direkt in der Navigation sichtbar; der Export bleibt verfügbar.
+- Ungültige gespeicherte Auswahlwerte werden bereinigt; eigene Texte bleiben erhalten.
+- Dezimalgewichte werden unterstützt; Rundungsfehler verfälschen gleich nahe Nachbarn nicht.
+- Gruppenbezeichnungen erscheinen auch bei den Kartenzuordnungen im Lernjournal.
+- Schmale Ansichten berücksichtigen lange Texte, skalierte Schrift und mobile Eingabefelder.
+- Startseiten-CSS wird separat geladen. Versionskennungen an CSS und JavaScript verhindern veraltete Dateien nach einem Update.
+
 ## Prüfung und Grenzen
 
-JavaScript-Syntax und Logik-/Strukturprüfungen wurden erfolgreich ausgeführt: alle erreichbaren Tokenpfade und ihre Verteilungen, Obstmodell und Rückgängig-Funktion, Selbsttests und Feedback, Kartenzuordnung, Aufgabenwahl, Wiederherstellung bestehender Eingaben, sichere Darstellung eigener Texte, Kapitelverweise, Druckmaterialien.
+JavaScript-Syntax und 338 Logik-/Strukturprüfungen wurden erfolgreich ausgeführt. Die Prüfungen decken unter anderem Kapitel-URLs, Zurück/Vorwärts, Wiederherstellung von Eingaben, ausgefallenen Browserspeicher, Löschen und Abbrechen, Dezimalgewichte, Tokenpfade, Selbsttests, Kartenzuordnung, Druckauswahl und Teachable-Machine-Reflexionen ab.
 
-Die Prüfungen sind als `checks.cjs` enthalten und können mit Node.js über `node checks.cjs` erneut ausgeführt werden.
+Die Prüfungen sind als `checks.cjs` enthalten und können mit `node checks.cjs` erneut ausgeführt werden. Zusätzlich wurden die erzeugten Kapitel- und Druckinhalte auf eindeutige IDs, passende Formularbeschriftungen, Sprungmarken und lokale Links geprüft.
 
-Diese Prüfungen liefen mit einem vereinfachten DOM-Ersatz. Ein echter Browser-, Mobilansichts- oder Drucklayouttest war in der Erstellungsumgebung nicht verfügbar. Vor dem ersten Workshop die Seite, Downloads und Druckvorschau auf den eingesetzten Geräten prüfen.
+Die Funktionsprüfungen verwenden einen DOM-Ersatz. Ein echter Browser konnte in der Bearbeitungsumgebung nicht gestartet werden; auch der Download eines Testbrowsers war nicht erreichbar. Visuelle Mobil- und Drucklayoutprüfungen stehen daher aus.
