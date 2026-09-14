@@ -1,6 +1,6 @@
 # KI verstehen · Unterricht gestalten
 
-Interaktive, deutschsprachige Weiterbildung für Lehrpersonen (120 Minuten).
+Interaktive, deutschsprachige Lernumgebung für Lehrpersonen ohne feste Zeitvorgaben.
 
 **KI benutzen ≠ KI-kompetent sein.** Entscheidend ist, was Lernende nach der Unterstützung durch KI selbst erklären, beurteilen, entscheiden oder gestalten können.
 
@@ -52,23 +52,9 @@ Das Vorhandensein der Dateien bedeutet noch nicht, dass GitHub Pages aktiviert i
 
 **Arbeitsmaterialien drucken** oder **Meinen Canvas drucken** wählen. Im Druckdialog **Als PDF speichern** auswählen. Druckeinstellungen: A4, 100 %, Browser-Kopf-/Fusszeilen bei Bedarf abschalten. Lange persönliche Eingaben können zusätzliche Seiten erzeugen.
 
-## Ablauf
+## Orientierung
 
-| Minuten | Aktivität |
-| --- | --- |
-| 0–10 | Kompetenzkompass und KI im Alltag |
-| 10–28 | Regeln versus Lernen aus Daten |
-| 28–40 | Regelchatbot und Sprachmodelle |
-| 40–52 | Fobizz/Gemini: A für alle, B/C arbeitsteilig |
-| 52–57 | Erkenntnisse sichern |
-| 57–62 | Pause |
-| 62–77 | Kompetenzkarten und Modell |
-| 77–92 | Aufgaben verbessern |
-| 92–110 | Eigene Lernaktivität gestalten |
-| 110–116 | Gallery Walk und Überarbeitung |
-| 116–120 | Kompetenzkompass und Exit-Ticket |
-
-Inputs sind auf höchstens drei Minuten am Stück angelegt. Bei Verzögerungen zusätzliche Experimentrunden kürzen, die Gestaltung und den Abschluss erhalten.
+Acht Kapitel verbinden Experimente, Reflexion und Unterrichtsgestaltung. Die Kapitel lassen sich über die Navigation frei aufrufen; es gibt keine Minutenpläne oder festen Bearbeitungsfristen.
 
 ## Vorbereitung
 
@@ -100,7 +86,7 @@ Die beiden Kompetenzrahmen und ihre Progressionsstufen werden nicht gleichgesetz
 
 ## Prüfung und Grenzen
 
-JavaScript-Syntax und Logik-/Strukturprüfungen wurden erfolgreich ausgeführt: alle erreichbaren Tokenpfade und ihre Verteilungen, Obstmodell und Rückgängig-Funktion, Selbsttests und Feedback, Kartenzuordnung, Aufgabenwahl, Wiederherstellung bestehender Eingaben, sichere Darstellung eigener Texte, Kapitelverweise, Druckmaterialien und zusammenhängender 120-Minuten-Zeitplan.
+JavaScript-Syntax und Logik-/Strukturprüfungen wurden erfolgreich ausgeführt: alle erreichbaren Tokenpfade und ihre Verteilungen, Obstmodell und Rückgängig-Funktion, Selbsttests und Feedback, Kartenzuordnung, Aufgabenwahl, Wiederherstellung bestehender Eingaben, sichere Darstellung eigener Texte, Kapitelverweise, Druckmaterialien.
 
 Die Prüfungen sind als `checks.cjs` enthalten und können mit Node.js über `node checks.cjs` erneut ausgeführt werden.
 

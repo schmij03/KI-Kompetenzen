@@ -23,7 +23,7 @@ Kurze Orientierung → Experiment oder Tätigkeit → Reflexion → eigene Erkl�
 
 ## Gestaltung
 
-Ruhige Arbeitsoberfläche mit dunkelblauer Typografie, weissem Hintergrund der Karten und petrolfarbenen Bedienelementen. Die Kapitelaktivität steht im Vordergrund. Zwei Spalten bei ausreichend Platz, eine Spalte auf kleinen Bildschirmen. Beschriftete Felder, sichtbarer Tastaturfokus, Textlabels zusätzlich zu Farben, bedienbare Kartenzuordnung über Auswahlfelder.
+Ruhige Arbeitsoberfläche mit dunkler petrolfarbener Typografie, warmem Hintergrund, weissen Karten und grünen Bedienelementen. Grosszügige Kapitelköpfe, dezente Schatten und klare Abstände unterstützen die Orientierung. Die Kapitelaktivität steht im Vordergrund. Zwei Spalten bei ausreichend Platz, eine Spalte auf kleinen Bildschirmen. Beschriftete Felder, sichtbarer Tastaturfokus, Textlabels zusätzlich zu Farben, bedienbare Kartenzuordnung über Auswahlfelder.
 
 ## Bewusste didaktische Entscheidungen
 
@@ -32,7 +32,7 @@ Ruhige Arbeitsoberfläche mit dunkelblauer Typografie, weissem Hintergrund der K
 - Das Nächster-Nachbar-Verfahren passt keine neuronalen Parameter an. Dieser Unterschied wird sichtbar erklärt.
 - Die Token-Simulation verwendet erfundene Verteilungen und von Hand definierte Übergänge. Sie demonstriert schrittweise Auswahl, nicht die Berechnung eines echten Sprachmodells. Ihr vereinfachter Kontext wird ausdrücklich benannt.
 - Training und Nutzung sind getrennte Prozesse. Die Tokenschätzung ist keine Schätzung von Wahrheit.
-- Prompting beansprucht zwölf Minuten: A für alle; B und C arbeitsteilig; gegenseitiger Austausch.
+- Prompting bietet drei frei wählbare Aufträge zu Kontext, Quellenprüfung und Perspektiven.
 - Nicht jeder KI-Einsatz bildet automatisch alle vier Bereiche. Fachliches Verständnis ist nicht automatisch Verständnis der KI-Funktionsweise.
 - Niveaustufen werden anhand der Originalmatrix begründet, nicht aus Selbsteinschätzung oder Promptlänge abgeleitet.
 - Gallery Walk enthält eine verbindliche Überarbeitung.
@@ -40,9 +40,9 @@ Ruhige Arbeitsoberfläche mit dunkelblauer Typografie, weissem Hintergrund der K
 
 ## Materialien
 
-Die zentrale Inhaltsquelle ist app.js. Daraus werden Webseite, ausfüllbare und leere Druckvorlagen sowie Folien erzeugt. Dadurch bleiben Karten, Zeitplan und Arbeitsaufträge konsistent.
+Die zentrale Inhaltsquelle ist app.js. Daraus werden Webseite, ausfüllbare und leere Druckvorlagen erzeugt. Dadurch bleiben Karten und Arbeitsaufträge konsistent.
 
-Druckpaket: Kompass, Experimentprotokoll, Prompting-Aufträge, Prüftabelle, zwölf Karten, sechs Aufgaben, Verbesserungsraster, zweiseitiger Canvas, Feedbackkarten, Exit-Ticket und Quellen. Der Moderationsleitfaden enthält Zeitplan, Vorbereitung, Offline-Alternative, Auswertung und fachliche Hinweise.
+Druckpaket: Kompass, Experimentprotokoll, Prompting-Aufträge, Prüftabelle, zwölf Karten, sechs Aufgaben, Verbesserungsraster, zweiseitiger Canvas, Feedbackkarten, Exit-Ticket und Quellen.
 
 ## Abgrenzungen
 
@@ -50,8 +50,8 @@ Keine eingebaute Chatbot-Schnittstelle und keine automatisierte Bewertung von Ko
 
 ## Weiterentwicklung
 
-Jedes Kapitel beginnt mit einem konkreten Lernbeleg und bietet Sprungmarken. Die mobile Navigation reduziert die Fläche vor der eigentlichen Tätigkeit. Selbsttests ersetzen im Workshop mündliche Kontrollfragen und verlängern den Zeitplan nicht; sie sind keine automatische Kompetenzmessung.
+Jedes Kapitel beginnt mit einem konkreten Lernbeleg und bietet Sprungmarken. Die mobile Navigation reduziert die Fläche vor der eigentlichen Tätigkeit. Selbsttests unterstützen die eigene Prüfung; sie sind keine automatische Kompetenzmessung.
 
 Das Obstdiagramm macht Abstände sichtbar, während Tabelle und Textausgabe die vollständige Information erhalten. Die Tokenpfade berücksichtigen nun ihren vollständigen Beispielkontext: sprachliche Fehler durch unverbundene Satzteile lenken nicht mehr vom Unterschied zwischen Plausibilität und Wahrheit ab. Weiterhin handelt es sich ausdrücklich um ein handgeschriebenes Spielzeugmodell.
 
-Bei der Aufgabenwahl und beim Umbenennen von Kartengruppen werden vorhandene eigene Texte nicht überschrieben. Der Canvas zeigt ein konkretes Beispiel für die Beziehung zwischen Lernziel, Lernbeleg und Qualitätskriterium. Die ergänzenden Selbsttests sind auch druckbar; Auswertungshilfen gehören zum Moderationsleitfaden.
+Bei der Aufgabenwahl und beim Umbenennen von Kartengruppen werden vorhandene eigene Texte nicht überschrieben. Der Canvas zeigt ein konkretes Beispiel für die Beziehung zwischen Lernziel, Lernbeleg und Qualitätskriterium. Die ergänzenden Selbsttests sind auch druckbar.

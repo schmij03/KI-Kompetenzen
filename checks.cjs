@@ -16,7 +16,7 @@ function harness(saved=null){
   querySelectorAll(){return [...nodes.values()].filter(n=>/^sort\d+$/.test(n.id))}};
  const localStorage={getItem(){return stored},setItem(k,v){stored=v}};
  const window={scrollTo(){},addEventListener(){},print(){}};
- const expose="\nreturn {state,pages,chapterView,actions,fruitGuess,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,schedule,render,go,markDone};";
+ const expose="\nreturn {state,pages,chapterView,actions,fruitGuess,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,render,go,markDone};";
  const api=new Function("document","localStorage","window",source+expose)(document,localStorage,window);
  return{api,node,events,saved:()=>stored};
 }
@@ -57,12 +57,10 @@ assert(api.tokenText()==="Die Hauptstadt der Schweiz ist Bern.","complete genera
 assert(!api.optionsNow().length,"stop generation");
 node("chatInput").value="Ich bin in der Schule";api.updateRules();assert(node("chatOutput").textContent.includes("Schule"),"rule priority");
 node("chatInput").value="Ich bin müde.";api.updateRules();assert(node("chatOutput").textContent==="Warum bist du müde?","rule substitution");
-let time=0;
-for(const row of api.schedule){const[a,b]=row[0].split("–").map(Number);assert(a===time&&b>a,"continuous schedule");time=b}
-assert(time===120,"120 minutes");
 api.put("modelOpen",true);
 for(let chapter=0;chapter<8;chapter++){
  api.state.chapter=chapter;const markup=api.chapterView();
+ assert(!/\bMinuten\b|\d+\s*Min\b/.test(markup),"no workshop timing in chapter "+chapter);
  assert(markup.includes("<h1>")&&markup.includes('class="learning-goal"'),"chapter has goal");
  const ids=[...markup.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
  assert(ids.length===new Set(ids).size,"unique IDs in chapter "+chapter);
@@ -92,6 +90,7 @@ assert(!node("groupSummary").innerHTML.includes("<script>"),"escape group names"
 assert(api.journalText().includes("Selbsttest:"),"quiz in journal");
 assert((api.materialsHTML().match(/<strong>Karte \d+<\/strong>/g)||[]).length===12,"12 printable cards");
 assert(api.materialsHTML().includes("Exit-Ticket"),"print exit ticket");
+assert(!/\bMinuten\b|\d+\s*Min\b/.test(api.materialsHTML()),"no timing in print materials");
 const restored=harness(saved()).api;
 assert(restored.val("verbesserteaufgabe")==="Meine vorhandene Überarbeitung","restore existing notes");
 const invalid=harness('{"answers":{"safe":"ok","bad":{},"constructor":"unsafe"},"done":[0,0,99],"chapter":999}').api;
