@@ -4,3 +4,32 @@
 @media(max-width:380px){.utilities{grid-template-columns:1fr}.header-note{display:none}.meter{grid-template-columns:75px minmax(20px,1fr) 45px}}
 @page{size:A4;margin:15mm}
 @media print{body{background:white;font-size:11pt;color:#111}#app,dialog,.skip,noscript{display:none!important}#paper{display:block!important}.sheet{break-after:page}.sheet:last-child{break-after:auto}h1{font-size:24pt;max-width:none;letter-spacing:normal}h2{font-size:18pt}h3{font-size:12pt}.printcards{display:grid;grid-template-columns:1fr 1fr;gap:6mm}.cut{border:1px dashed #777;padding:5mm;break-inside:avoid;min-height:48mm}.lines{min-height:17mm;border-bottom:1px solid #999;margin-bottom:4mm;white-space:pre-wrap;overflow-wrap:anywhere}.lines.large{min-height:30mm}.printfield{break-inside:avoid}table{font-size:9pt}th,td{padding:2mm}.note{background:none}a{color:inherit}}
+
+/* Learning surface: compact orientation, readable experiments, focused mobile navigation. */
+[hidden]{display:none!important}
+.mobile-chapters{display:none}
+.resource-menu{border-top:1px solid var(--line);padding-top:.7rem}
+.resource-menu summary{font-size:.9rem}
+.resource-menu .utilities{margin:.8rem 0}
+.learning-goal{display:grid;gap:.2rem;border-left:3px solid var(--brand);padding:.6rem 1rem;margin:1.2rem 0 1.5rem}
+.learning-goal span{font-size:.82rem;color:var(--brand);font-weight:650}
+.learning-goal strong{font-size:1rem;font-weight:600}
+.chapter-outline{font-size:.92rem;margin:.5rem 0}
+.chapter-outline summary{color:var(--muted)}
+.chapter-outline ol{columns:2;column-gap:2rem;padding-left:1.3rem}
+.chapter-outline li{break-inside:avoid;margin:.4rem 0}
+.prompt-text{background:#f0f5f7;border-left:3px solid var(--brand);padding:1rem;user-select:text}
+.canvas-review{margin-top:1rem;padding:1rem;border:1px solid var(--line);border-radius:8px;background:#f4f8fa}
+.quiz fieldset{border:0;padding:0;margin:0 0 1rem;min-width:0}
+.quiz legend{font-weight:650;margin-bottom:.6rem}
+.quiz input[type=radio]{width:1.15rem;height:1.15rem;accent-color:var(--brand);flex-shrink:0}
+.quiz .check{border:1px solid var(--line);border-radius:8px;padding:.8rem;font-weight:400}
+.quiz .check:has(input:checked){border-color:var(--brand);background:#eef7f7}
+#fruitChart svg{display:block;width:100%;max-width:780px;height:auto;margin:auto}
+#fruitChart svg text{font:14px system-ui,sans-serif;fill:var(--ink)}
+h2,[tabindex="-1"]{scroll-margin-top:1.5rem}
+textarea{min-height:100px;line-height:1.55}
+.status:empty{min-height:0;margin:.4rem 0}
+@media(min-width:851px){aside{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto}.card{padding:1.6rem}main{padding-top:2.1rem}.steps{margin-bottom:1.2rem}}
+@media(max-width:850px){.mobile-chapters{display:block}.mobile-chapters label{font-size:.85rem;margin-top:.5rem}.mobile-chapters select{width:100%}nav{display:none}aside{padding:.8rem 1.2rem;border-bottom:1px solid var(--line);background:white}aside>.eyebrow{display:none}#progressText{margin:0;font-size:.82rem}.resource-menu{margin:.6rem 0 0;padding:0;border:0}.resource-menu summary{font-size:.85rem}main{padding-top:1.5rem}.steps{display:none}.chapter-outline ol{columns:1}.rating{gap:.6rem}.card{padding:1.1rem}button,.button{min-height:44px}h1{font-size:2rem}.learning-goal{margin:1rem 0}.header-note{font-size:.8rem}}
+@media print{.sheet h1{margin-bottom:6mm}.sheet h2,.sheet h3{break-after:avoid}.sheet tr{break-inside:avoid}.sheet thead{display:table-header-group}.printfield .lines{orphans:3;widows:3}.sheet{overflow:visible}a{text-decoration:none}}

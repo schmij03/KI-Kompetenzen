@@ -47,3 +47,11 @@ Druckpaket: Kompass, Experimentprotokoll, Prompting-Aufträge, Prüftabelle, zw�
 ## Abgrenzungen
 
 Keine eingebaute Chatbot-Schnittstelle und keine automatisierte Bewertung von Kompetenz. Kein allgemeiner Informatikkurs. Keine gemeinsame Cloud-Sammlung von Teilnehmerdaten. Keine Gleichsetzung des Vier-Bereiche-Modells mit AILit. Keine übernommenen Originalgrafiken ohne separat geprüfte Verwendung.
+
+## Weiterentwicklung
+
+Jedes Kapitel beginnt mit einem konkreten Lernbeleg und bietet Sprungmarken. Die mobile Navigation reduziert die Fläche vor der eigentlichen Tätigkeit. Selbsttests ersetzen im Workshop mündliche Kontrollfragen und verlängern den Zeitplan nicht; sie sind keine automatische Kompetenzmessung.
+
+Das Obstdiagramm macht Abstände sichtbar, während Tabelle und Textausgabe die vollständige Information erhalten. Die Tokenpfade berücksichtigen nun ihren vollständigen Beispielkontext: sprachliche Fehler durch unverbundene Satzteile lenken nicht mehr vom Unterschied zwischen Plausibilität und Wahrheit ab. Weiterhin handelt es sich ausdrücklich um ein handgeschriebenes Spielzeugmodell.
+
+Bei der Aufgabenwahl und beim Umbenennen von Kartengruppen werden vorhandene eigene Texte nicht überschrieben. Der Canvas zeigt ein konkretes Beispiel für die Beziehung zwischen Lernziel, Lernbeleg und Qualitätskriterium. Die ergänzenden Selbsttests sind auch druckbar; Auswertungshilfen gehören zum Moderationsleitfaden.

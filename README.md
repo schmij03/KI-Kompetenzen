@@ -21,6 +21,19 @@ Erwartete Adresse nach Aktivierung: https://schmij03.github.io/KI-Kompetenzen/
 
 Das Vorhandensein der Dateien bedeutet noch nicht, dass GitHub Pages aktiviert ist.
 
+## Verbesserungen der zweiten Fassung
+
+- Kompakte Kapitelauswahl auf dem Smartphone; Materialien und Hinweise sind ausklappbar.
+- Lernziel und Sprungmarken für jedes Kapitel.
+- Gewichtsdiagramm mit markierten nächsten Nachbarn und Rückgängig-Funktion.
+- Die gewählte Gewichtsregel und der Testfall bleiben beim Kapitelwechsel erhalten.
+- Kontextabhängige, sprachlich nachvollziehbare Tokenpfade; erfundene Wahrscheinlichkeiten weiterhin ausdrücklich gekennzeichnet.
+- Drei kurze Selbsttests mit erklärendem Feedback, auch in den Druckmaterialien und im Lernjournal.
+- Eigene Gruppennamen und Zuordnungen aktualisieren die Kartenübersicht unmittelbar.
+- Aufgabenwahl übernimmt den Ausgangsauftrag ins Raster und bewahrt eigene Überarbeitungen.
+- Canvas-Beispiel und konkrete Fragen zur Qualität der geplanten Lernbelege.
+- Kopierbestätigung direkt beim jeweiligen Prompt.
+
 ## Enthalten
 
 - Acht Kapitel mit Schritt-für-Schritt-Navigation und Bearbeitungsfortschritt.
@@ -76,6 +89,7 @@ Browserdaten können gelöscht werden oder auf geteilten Geräten zugänglich bl
 - `app.js`: Inhalte, Simulationen, Formulare, Export, Druckmaterialien, Präsentation.
 - `KONZEPT.md`: Informationsarchitektur und didaktische Entscheidungen.
 - `.nojekyll`: statische Auslieferung mit GitHub Pages.
+- `checks.cjs`: reproduzierbare Prüfungen ohne zusätzliche Pakete; ausführen mit `node checks.cjs`.
 
 ## Quellen und Einordnung
 
@@ -88,6 +102,8 @@ Die beiden Kompetenzrahmen und ihre Progressionsstufen werden nicht gleichgesetz
 
 ## Prüfung und Grenzen
 
-JavaScript-Syntax und 85 Logik-/Strukturprüfungen wurden erfolgreich ausgeführt: Obstmodell einschliesslich Gleichständen, Tokenverteilungen und Auswahl, Chatbot-Regelpriorität, Eingabevalidierung, Kapitelstruktur, Aktionszuordnung, sichere Darstellung eigener Eingaben, Druckkarten und zusammenhängender 120-Minuten-Zeitplan.
+JavaScript-Syntax und 298 Logik-/Strukturprüfungen wurden erfolgreich ausgeführt: alle erreichbaren Tokenpfade und ihre Verteilungen, Obstmodell und Rückgängig-Funktion, Selbsttests und Feedback, Kartenzuordnung, Aufgabenwahl, Wiederherstellung bestehender Eingaben, sichere Darstellung eigener Texte, Kapitelverweise, Druckmaterialien und zusammenhängender 120-Minuten-Zeitplan.
+
+Die Prüfungen sind als `checks.cjs` enthalten und können mit Node.js über `node checks.cjs` erneut ausgeführt werden.
 
 Diese Prüfungen liefen mit einem vereinfachten DOM-Ersatz. Ein echter Browser-, Mobilansichts- oder Drucklayouttest war in der Erstellungsumgebung nicht verfügbar. Vor dem ersten Workshop die Seite, Downloads und Druckvorschau auf den eingesetzten Geräten prüfen.
