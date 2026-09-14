@@ -6,7 +6,7 @@ Interaktive, deutschsprachige Lernumgebung für Lehrpersonen ohne feste Zeitvorg
 
 ## Starten
 
-Repository herunterladen und `index.html` in einem aktuellen Browser öffnen. Die Startseite stellt die Lernumgebung vor und verlinkt alle acht Kapitel. **Lernumgebung öffnen** führt zum zuletzt geöffneten Kapitel oder beim ersten Besuch zum Einstieg. Keine Installation, keine Abhängigkeiten und kein Build erforderlich. Die Simulationen funktionieren lokal. Fobizz und Gemini benötigen Internet und einen geeigneten Zugang.
+Repository herunterladen und `index.html` in einem aktuellen Browser öffnen. Die Startseite stellt die Lernumgebung vor und verlinkt alle acht Kapitel. **Lernumgebung öffnen** führt zum zuletzt geöffneten Kapitel oder beim ersten Besuch zum Einstieg. Keine Installation, keine Abhängigkeiten und kein Build erforderlich. Die Simulationen funktionieren lokal. Fobizz und Gemini benötigen Internet und einen geeigneten Zugang. Für die freiwillige Teachable-Machine-Aufgabe werden Internet, ein geeigneter Browser sowie eine Webcam oder eigene Bilddateien benötigt.
 
 ## GitHub Pages
 
@@ -39,6 +39,7 @@ Das Vorhandensein der Dateien bedeutet noch nicht, dass GitHub Pages aktiviert i
 - Acht Kapitel mit Schritt-für-Schritt-Navigation und Bearbeitungsfortschritt.
 - Kompetenzkompass vor und nach der Weiterbildung.
 - Obstexperiment: feste Regel versus Nächster-Nachbar-Klassifikator; uneindeutige Fälle sichtbar.
+- Freiwillige Zusatzaufgabe mit Teachable Machine: Bildmodell für Stift und Radiergummi trainieren, mit neuen Bildern prüfen und den Einfluss des Hintergrunds untersuchen. Reflexionen sind im Lernjournal enthalten; eine Druckvorlage ergänzt die Aufgabe.
 - Regelchatbot und ausdrücklich vereinfachte Token-Simulation.
 - Prompting-Aufträge ausschliesslich für Fobizz oder Gemini.
 - Quellenprüfung, Perspektivenvergleich und Reflexionsfelder.
