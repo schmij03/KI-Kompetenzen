@@ -18,6 +18,9 @@ function save(){
  ?"Eingaben werden in diesem Browser gespeichert, nicht an einen Workshop-Server gesendet. Exportiere dein Lernjournal vor dem Gerätewechsel."
  :"Dauerhaftes Speichern ist nicht verfügbar. Bitte exportiere dein Lernjournal vor dem Schliessen.";
 }
+// A chapter link selects its destination; a plain entry resumes the saved chapter.
+const requestedChapter=new URLSearchParams(window.location?.search||"").get("kapitel");
+if(requestedChapter!==null&&/^[0-7]$/.test(requestedChapter))state.chapter=Number(requestedChapter);
 const val=k=>state.answers[k]??"";
 function put(k,v){state.answers[k]=v;refreshGroupNames(k);save()}
 function field(k,label,placeholder=""){return '<label for="'+k+'">'+label+'</label><textarea id="'+k+'" data-key="'+k+'" placeholder="'+esc(placeholder)+'">'+esc(val(k))+'</textarea>'}

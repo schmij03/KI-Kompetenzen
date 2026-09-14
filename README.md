@@ -6,7 +6,7 @@ Interaktive, deutschsprachige Lernumgebung für Lehrpersonen ohne feste Zeitvorg
 
 ## Starten
 
-Repository herunterladen und `index.html` in einem aktuellen Browser öffnen. Keine Installation, keine Abhängigkeiten und kein Build erforderlich. Die Simulationen funktionieren lokal. Fobizz und Gemini benötigen Internet und einen geeigneten Zugang.
+Repository herunterladen und `index.html` in einem aktuellen Browser öffnen. Die Startseite stellt die Lernumgebung vor und verlinkt alle acht Kapitel. **Lernumgebung öffnen** führt zum zuletzt geöffneten Kapitel oder beim ersten Besuch zum Einstieg. Keine Installation, keine Abhängigkeiten und kein Build erforderlich. Die Simulationen funktionieren lokal. Fobizz und Gemini benötigen Internet und einen geeigneten Zugang.
 
 ## GitHub Pages
 
@@ -68,7 +68,8 @@ Browserdaten können gelöscht werden oder auf geteilten Geräten zugänglich bl
 
 ## Dateien
 
-- `index.html`: Grundgerüst.
+- `index.html`: Startseite mit Einführung, Kompetenzkompass und Kapitelübersicht.
+- `lernen.html`: Grundgerüst der interaktiven Lernumgebung; direkte Kapitelwahl über `?kapitel=0` bis `?kapitel=7`.
 - `styles.css`: Darstellung, mobile Ansichten und A4-Druck.
 - `app.js`: Inhalte, Simulationen, Formulare, Export, Druckmaterialien.
 - `KONZEPT.md`: Informationsarchitektur und didaktische Entscheidungen.

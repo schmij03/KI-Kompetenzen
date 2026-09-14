@@ -2,10 +2,11 @@
 "use strict";
 const fs=require("node:fs");
 const source=fs.readFileSync(require("node:path").join(__dirname,"app.js"),"utf8");
-const html=fs.readFileSync(require("node:path").join(__dirname,"index.html"),"utf8");
+const html=fs.readFileSync(require("node:path").join(__dirname,"lernen.html"),"utf8");
+const landing=fs.readFileSync(require("node:path").join(__dirname,"index.html"),"utf8");
 let assertions=0;
 function assert(ok,label){if(!ok)throw new Error(label);assertions++}
-function harness(saved=null){
+function harness(saved=null,search=""){
  const nodes=new Map(),events={};let stored=saved;
  const node=id=>{
   if(!nodes.has(id))nodes.set(id,{id,_value:"",get value(){return this._value},set value(v){this._value=String(v)},innerHTML:"",textContent:"",hidden:false,disabled:false,options:[{},{},{},{},{}],
@@ -15,12 +16,21 @@ function harness(saved=null){
  const document={getElementById:node,addEventListener(name,fn){(events[name]??=[]).push(fn)},
   querySelectorAll(){return [...nodes.values()].filter(n=>/^sort\d+$/.test(n.id))}};
  const localStorage={getItem(){return stored},setItem(k,v){stored=v}};
- const window={scrollTo(){},addEventListener(){},print(){}};
+ const window={location:{search},scrollTo(){},addEventListener(){},print(){}};
  const expose="\nreturn {state,pages,chapterView,actions,fruitGuess,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,render,go,markDone};";
  const api=new Function("document","localStorage","window",source+expose)(document,localStorage,window);
  return{api,node,events,saved:()=>stored};
 }
 const {api,node,events,saved}=harness();
+for(let i=0;i<8;i++)assert(landing.includes('href="./lernen.html?kapitel='+i+'"'),"homepage links to chapter "+i);
+assert(landing.includes('href="./lernen.html"'),"homepage offers saved chapter entry");
+assert(html.includes('href="./"'),"learning environment links home");
+for(let i=0;i<8;i++)assert(harness(null,"?kapitel="+i).api.state.chapter===i,"landing chapter destination "+i);
+const savedChapter=JSON.stringify({answers:{startbeleg:"Mein Beispiel"},done:[0],chapter:4});
+assert(harness(savedChapter).api.state.chapter===4,"plain entry resumes chapter");
+const linked=harness(savedChapter,"?kapitel=2").api;
+assert(linked.state.chapter===2&&linked.val("startbeleg")==="Mein Beispiel"&&linked.state.done.includes(0),"chapter link preserves saved work");
+assert(harness(savedChapter,"?kapitel=99").api.state.chapter===4,"invalid chapter retains saved chapter");
 assert(api.fruitGuess(api.baseFruit,160).label==="Apfel","initial fruit prediction");
 assert(api.fruitGuess([...api.baseFruit,{w:160,t:"Birne"}],160).label==="Birne","additional pear");
 assert(api.fruitGuess(api.baseFruit,140).label==="uneindeutig","equal distance");

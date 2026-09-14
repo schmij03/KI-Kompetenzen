@@ -8,6 +8,10 @@ Lehrpersonen erleben KI als Lerngegenstand, Werkzeug und Reflexionsanlass. Am En
 
 Kurze Orientierung → Experiment oder Tätigkeit → Reflexion → eigene Erklärung → Transfer. Die Erkenntnissicherung bleibt von der automatischen Bearbeitungsanzeige getrennt.
 
+## Startseite
+
+Die Startseite führt mit einem kurzen Lernversprechen, vier Kompetenzperspektiven und acht Kapitelkarten in die Lernumgebung ein. Die Kapitelkarten verlinken direkt auf das jeweilige Thema. Der allgemeine Einstieg übernimmt das zuletzt gespeicherte Kapitel. Logo und Startseitenlink führen aus der Lernumgebung zurück zur Übersicht. Bestehende Eingaben und Fortschritt bleiben erhalten.
+
 ## Navigation
 
 | Kapitel | Primäre Tätigkeit | Lernbeleg |
