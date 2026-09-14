@@ -16,7 +16,7 @@ function harness(saved=null){
   querySelectorAll(){return [...nodes.values()].filter(n=>/^sort\d+$/.test(n.id))}};
  const localStorage={getItem(){return stored},setItem(k,v){stored=v}};
  const window={scrollTo(){},addEventListener(){},print(){}};
- const expose="\nreturn {state,pages,chapterView,actions,fruitGuess,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,guideHTML,schedule,render,go,markDone};";
+ const expose="\nreturn {state,pages,chapterView,actions,fruitGuess,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,schedule,render,go,markDone};";
  const api=new Function("document","localStorage","window",source+expose)(document,localStorage,window);
  return{api,node,events,saved:()=>stored};
 }
@@ -91,7 +91,6 @@ api.put("group1","<script>alert(1)</script>");
 assert(!node("groupSummary").innerHTML.includes("<script>"),"escape group names");
 assert(api.journalText().includes("Selbsttest:"),"quiz in journal");
 assert((api.materialsHTML().match(/<strong>Karte \d+<\/strong>/g)||[]).length===12,"12 printable cards");
-assert(api.guideHTML().includes("120 Minuten"),"print guide");
 assert(api.materialsHTML().includes("Exit-Ticket"),"print exit ticket");
 const restored=harness(saved()).api;
 assert(restored.val("verbesserteaufgabe")==="Meine vorhandene Überarbeitung","restore existing notes");

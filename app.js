@@ -268,11 +268,6 @@ function canvasPaper(filled=false){
  canvasFields.slice(2).map(([k,l])=>lines(l,v("canvas_"+k))).join("")+
  lines("Alternative ohne KI-Zugang",v("ohnezugang")));
 }
-function scheduleTable(){return'<table><thead><tr><th>Zeit</th><th>Phase</th><th>Moderation und Aktivität</th></tr></thead><tbody>'+schedule.map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>').join("")+'</tbody></table>'}
-function guideHTML(){return sheet("Moderationsleitfaden · 120 Minuten",'<p><strong>Leitfrage:</strong> Was kann die lernende Person danach selbst?</p>'+scheduleTable())+
- sheet("Vorbereitung und fachliche Hinweise",'<h2>Vorbereitung</h2><ul><li>Fobizz- oder Gemini-Zugänge vorab prüfen; ein Gerät pro Gruppe.</li><li>Materialien drucken: Kartensätze pro Gruppe, Aufgaben und Raster, ein Canvas pro Person, Feedback- und Exit-Karten.</li><li>Geeignete Lehrmittel oder überprüfbare Fachquellen für Experiment B bereitlegen.</li><li>Post-its und Stifte bereitstellen; Zweier- oder Dreiergruppen bilden.</li><li>Bei fehlendem Netz: Obstkarten, Wortfortsetzungen und den ausdrücklich konstruierten Beispieloutput nutzen. Praktisches Prompting später nachholen; die Offline-Reserve erfüllt dieses Lernziel nicht vollständig.</li></ul><h2>Moderation</h2><p>Inputs auf höchstens drei Minuten begrenzen. Erst beobachten lassen, dann erklären. Fragen sammeln, die den Zeitrahmen sprengen. Bei Verzögerungen zusätzliche Simulationsrunden kürzen; eigene Gestaltung und Abschluss erhalten.</p><h2>Wichtige Unterscheidungen</h2><ul><li>Ein regelbasiertes System ist nicht automatisch maschinelles Lernen.</li><li>Das Obstmodell speichert Beispiele. Ein Sprachmodell passt Parameter an.</li><li>Neue Trainingsdaten ändern ein System nur, wenn dessen Lernverfahren sie einbezieht.</li><li>Prompt und Kontext sind nicht mit erneutem Training gleichzusetzen.</li><li>Tokenwahrscheinlichkeit ist keine Wahrheitswahrscheinlichkeit.</li><li>KI kann Fehler erzeugen; sie muss nicht in jedem Versuch einen Fehler erzeugen.</li><li>Selbsteinschätzungswerte sind keine Modellniveaus.</li><li>Ein Kompetenzbereich benötigt eine beobachtbare Handlung und einen Beleg.</li></ul>')+
- sheet("Auswertungshilfen",'<h2>Obstexperiment</h2><p>160 g → Apfel. Mit zusätzlicher Birne bei 160 g → Birne. Mit Apfel und Birne bei 160 g → uneindeutig. Mit den Ausgangsdaten ist 140 g ebenfalls uneindeutig. Die feste Regel verändert sich erst bei Änderung ihres Schwellenwerts.</p><h2>Kompetenzkarten: mögliche Schwerpunkte</h2>'+domains.map((d,i)=>'<p><strong>'+d+':</strong> '+cardMap.map((x,j)=>x===i?j+1:null).filter(Boolean).join(", ")+'.</p>').join("")+'<p>Alternative Zuordnungen akzeptieren, wenn sie die Handlung nachvollziehbar begründen.</p><h2>Lernbelege prüfen</h2><p><strong>Noch nicht sichtbar:</strong> Nur ein KI-Output liegt vor.</p><p><strong>Sichtbar:</strong> Die Person erklärt, prüft oder entscheidet anhand benannter Kriterien.</p><p><strong>Belastbarer Transfer:</strong> Die Person wendet die Kompetenz an einem neuen Fall an und begründet ihre Entscheidung selbst.</p><p>Dies sind Workshop-Prüfkriterien, keine offizielle Niveauskala.</p><h2>Abschluss</h2><p>Keine langen Wortbeiträge. Selbsteinschätzung und Exit-Ticket schriftlich sichern. Eine konkrete Unterrichtserprobung mit Zeitpunkt festlegen.</p>')+
- sheet("Selbsttests: Auswertung",quizzes.map(q=>'<h2>'+q.title+'</h2><p><strong>Passende Antwort:</strong> '+q.options[q.correct]+'</p><p>'+q.feedback+'</p>').join(""))+sheet("Quellen und Einordnung",sourcesHTML)}
 function materialsHTML(){
  let out=sheet("Kompetenzkompass",'<p>Vorher und nachher ausfüllen. 1 = noch unsicher, 4 = sehr sicher.</p><table><thead><tr><th>Bereich und Aussage</th><th>Vorher</th><th>Nachher</th></tr></thead><tbody>'+compass.map((c,i)=>'<tr><td><strong>'+domains[i]+'</strong><br>'+c+'</td><td>1 2 3 4</td><td>1 2 3 4</td></tr>').join("")+'</tbody></table>'+lines("Ein konkreter Beleg für meine Einschätzung …","",true)+'<p>Die Werte sind eine Selbsteinschätzung, keine Zuordnung zu I–III.</p>');
  out+=sheet("Experimentprotokoll",'<h2>Obstmodell</h2><p>Ausgangsdaten: Apfel 150 / 180 g; Birne 110 / 130 g. Ordne nach dem nächsten Gewicht zu. Bei gleich nahen, unterschiedlichen Etiketten: uneindeutig.</p><table><tr><th>Versuch</th><th>Vorhersage und Erklärung</th></tr>'+["Neuer Fall: 160 g","Zusätzlich Birne 160 g","Zusätzlich auch Apfel 160 g","Neuer Fall ausserhalb der bisherigen Gewichte"].map(t=>'<tr style="height:14mm"><td>'+t+'</td><td></td></tr>').join("")+'</table>'+lines("Welche Merkmale fehlen? Warum sind mehr Daten nicht automatisch besser?")+'<h2>Sprachmodell</h2>'+lines("Was passiert beim Training?")+lines("Was passiert bei der Nutzung?")+lines("Warum bedeutet plausibel nicht automatisch wahr?"));
@@ -287,26 +282,9 @@ function materialsHTML(){
  out+=sheet("Selbsttests",quizzes.map(q=>'<h2>'+q.title+'</h2><p>'+q.question+'</p>'+q.options.map(t=>'<p>☐ '+t+'</p>').join("")).join(""));
  out+=sheet("Quellen und Bearbeitung",sourcesHTML);return out;
 }
-const slideData=[
- ["KI benutzen ≠ KI-kompetent sein","Was kann die lernende Person danach selbst erklären, beurteilen, entscheiden oder gestalten?","Einstieg: Ziel nennen, danach sofort Selbsteinschätzung und Austausch."],
- ["Daten beeinflussen Ergebnisse","Feste Regeln werden von Menschen formuliert. Unser Datenmodell nutzt ähnliche Beispiele. Gewicht allein genügt nicht.","Nach dem Obstexperiment zeigen. Ein Paar erklärt die Veränderung."],
- ["Training und Nutzung unterscheiden","Training: Daten → angepasste Parameter. Nutzung: Modell + Kontext → Tokenverteilung → Auswahl → neuer Kontext.","Maximal drei Minuten. Token sind nicht immer ganze Wörter."],
- ["Plausibel bedeutet nicht automatisch wahr","KI kann Varianten erzeugen. Menschen setzen Kriterien, prüfen Aussagen und entscheiden über die Verwendung.","Nach dem Prompting mit einer konkreten Beobachtung aus den Gruppen verbinden."],
- ["Vier Bereiche, sichtbare Handlungen","Verstehen · Anwenden · Reflektieren · Mitgestalten","Erst nach dem Kartensortieren zeigen. Bereiche greifen ineinander. Niveaus anhand der Originalmatrix wählen."],
- ["Was kann die lernende Person selbst?","Erst selbst denken. KI gezielt einsetzen. Ergebnisse prüfen. Entscheidungen begründen. Lernen sichtbar machen.","Design-Sprint eröffnen. Canvas, Gallery Walk und Exit-Ticket über die Webseite steuern."]
-];
-let slideIndex=0;
-function renderSlide(){
- const s=slideData[slideIndex];$("slidebody").innerHTML='<h2 id="slideTitle">'+s[0]+'</h2><p>'+s[1]+'</p><details><summary>Moderationsnotiz</summary><div>'+s[2]+'</div></details>';
- $("slideCount").textContent=(slideIndex+1)+" / "+slideData.length;$("slidePrev").disabled=slideIndex===0;$("slideNext").disabled=slideIndex===slideData.length-1;
-}
-function changeSlide(d){slideIndex=Math.max(0,Math.min(slideData.length-1,slideIndex+d));renderSlide()}
 const actions={
- go:b=>go(Number(b.dataset.index)),materials:()=>doPrint(materialsHTML()),guide:()=>doPrint(guideHTML()),
+ go:b=>go(Number(b.dataset.index)),materials:()=>doPrint(materialsHTML()),
  canvas:()=>doPrint(canvasPaper(true)),export:exportNotes,clear:clearNotes,
- slides:()=>{slideIndex=0;renderSlide();$("slides").showModal()},
- closeSlides:()=>$("slides").close(),slidePrev:()=>changeSlide(-1),slideNext:()=>changeSlide(1),
- printSlides:()=>{$("slides").close();doPrint(slideData.map(s=>sheet(s[0],'<p style="font-size:20pt">'+s[1]+'</p><p class="small">Moderation: '+s[2]+'</p>')).join(""))},
  addFruit,resetFruit,undoFruit,nextToken,resetTokens,copy:b=>copyPrompt(Number(b.dataset.index)),revealModel,chooseTask:b=>chooseTask(Number(b.dataset.index)),quiz:b=>checkQuiz(Number(b.dataset.index))
 };
 

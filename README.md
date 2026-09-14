@@ -45,14 +45,12 @@ Das Vorhandensein der Dateien bedeutet noch nicht, dass GitHub Pages aktiviert i
 - Zwölf Kompetenzkarten mit eigener Gruppensortierung und nachträglicher Modelleinsicht.
 - Sechs Unterrichtsaufgaben mit Verbesserungsvorschlägen.
 - Ausfüllbarer KI-Kompetenz-Canvas, Gallery Walk, Exit-Ticket.
-- Moderationsleitfaden, druckbare Arbeitsmaterialien und sechs Präsentationsfolien.
+- Druckbare Arbeitsmaterialien.
 - Export des persönlichen Lernjournals als Textdatei.
 
-## PDF und Präsentation
+## PDF
 
-**Arbeitsmaterialien drucken**, **Moderationsleitfaden** oder **Meinen Canvas drucken** wählen. Im Druckdialog **Als PDF speichern** auswählen. Druckeinstellungen: A4, 100 %, Browser-Kopf-/Fusszeilen bei Bedarf abschalten. Lange persönliche Eingaben können zusätzliche Seiten erzeugen.
-
-**Präsentation · 6 Folien** öffnet die ergänzende Präsentation mit Moderationsnotizen. Sie lässt sich ebenfalls drucken. Es liegen keine vorab gerenderten PDF- oder PowerPoint-Dateien vor.
+**Arbeitsmaterialien drucken** oder **Meinen Canvas drucken** wählen. Im Druckdialog **Als PDF speichern** auswählen. Druckeinstellungen: A4, 100 %, Browser-Kopf-/Fusszeilen bei Bedarf abschalten. Lange persönliche Eingaben können zusätzliche Seiten erzeugen.
 
 ## Ablauf
 
@@ -86,7 +84,7 @@ Browserdaten können gelöscht werden oder auf geteilten Geräten zugänglich bl
 
 - `index.html`: Grundgerüst.
 - `styles.css`: Darstellung, mobile Ansichten und A4-Druck.
-- `app.js`: Inhalte, Simulationen, Formulare, Export, Druckmaterialien, Präsentation.
+- `app.js`: Inhalte, Simulationen, Formulare, Export, Druckmaterialien.
 - `KONZEPT.md`: Informationsarchitektur und didaktische Entscheidungen.
 - `.nojekyll`: statische Auslieferung mit GitHub Pages.
 - `checks.cjs`: reproduzierbare Prüfungen ohne zusätzliche Pakete; ausführen mit `node checks.cjs`.
@@ -102,7 +100,7 @@ Die beiden Kompetenzrahmen und ihre Progressionsstufen werden nicht gleichgesetz
 
 ## Prüfung und Grenzen
 
-JavaScript-Syntax und 298 Logik-/Strukturprüfungen wurden erfolgreich ausgeführt: alle erreichbaren Tokenpfade und ihre Verteilungen, Obstmodell und Rückgängig-Funktion, Selbsttests und Feedback, Kartenzuordnung, Aufgabenwahl, Wiederherstellung bestehender Eingaben, sichere Darstellung eigener Texte, Kapitelverweise, Druckmaterialien und zusammenhängender 120-Minuten-Zeitplan.
+JavaScript-Syntax und Logik-/Strukturprüfungen wurden erfolgreich ausgeführt: alle erreichbaren Tokenpfade und ihre Verteilungen, Obstmodell und Rückgängig-Funktion, Selbsttests und Feedback, Kartenzuordnung, Aufgabenwahl, Wiederherstellung bestehender Eingaben, sichere Darstellung eigener Texte, Kapitelverweise, Druckmaterialien und zusammenhängender 120-Minuten-Zeitplan.
 
 Die Prüfungen sind als `checks.cjs` enthalten und können mit Node.js über `node checks.cjs` erneut ausgeführt werden.
 
