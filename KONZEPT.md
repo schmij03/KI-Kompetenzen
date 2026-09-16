@@ -64,3 +64,7 @@ Bei der Aufgabenwahl und beim Umbenennen von Kartengruppen werden vorhandene eig
 ## Eigene Seite für Unterrichtsideen
 
 Die Sammlung ergänzt die acht Kapitel als frei zugänglicher Transferbereich. Jede Karte verbindet eine beobachtbare Lernleistung mit Vorbereitung, Ablauf, Differenzierung und Quelle. Suche sowie Filter nach Stufe, Ausstattung und Kompetenz helfen bei der Auswahl. Die Stufen sind didaktische Vorschläge, keine Ableitung von Kompetenzniveaus. Über den Canvas-Link wird die eigene Planung fortgesetzt; bestehende Notizen bleiben unberührt. Einzeldruck ermöglicht die Nutzung als Unterrichtsvorbereitung. Original-PDFs und Grafiken werden nicht erneut veröffentlicht.
+
+## AILit-Abgleich und Mitgestalten
+
+Die deutsche Original-PDF 2026 wurde für die relevanten Aussagen ausgewertet (siehe AILIT-ABGLEICH.md). Die Modelleinsicht verbindet Wissen, Fähigkeiten/Fertigkeiten und Haltungen mit den vier AILit-Bereichen. Progressionsstufen werden weder gleichgesetzt noch an Klassenstufen gebunden. «Mitgestalten» benötigt einen konkreten Gestaltungsgegenstand, Kriterien und begründete Entscheidungen. Die gemeinsame Gestaltung von Nutzungspraxis und die Untersuchung bzw. Verbesserung eines KI-Systems werden unterschieden. Beide können ohne Programmierung stattfinden. Quellenhinweise erscheinen auch im bestehenden Druckpaket.

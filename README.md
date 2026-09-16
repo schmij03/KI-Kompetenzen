@@ -82,7 +82,7 @@ Browserdaten können gelöscht werden oder auf geteilten Geräten zugänglich bl
 
 - [DLH Zürich: KI-Kompetenzen für Lehrende und Lernende](https://dlh.zh.ch/home/wb-kompass/kompetenzmodelle/ki-kompetenzen-fuer-lehrende-und-lernende). Modell von **Susanne Alles, Joscha Falck, Manuel Flick und Regina Schulz**. Die Originalgrafiken sind nicht in dieses Repository kopiert. Karten und Kurzbeschreibungen sind didaktische Bearbeitungen.
 - [Kompass digitaler Wandel: Informatik](https://kompassdigitalerwandel.ch/dk04/).
-- [OECD/EU AILit Framework](https://ailiteracyframework.org/). Angaben zur deutschen Fassung 2026 beruhen auf der bereitgestellten Zusammenfassung; der Abgleich mit der Original-PDF steht aus.
+- OECD / Europäische Union (2026): *Lernende für das KI-Zeitalter befähigen – Ein KI-Kompetenzrahmen für die Primar- und Sekundarstufe*. Mit der bereitgestellten deutschen Original-PDF abgeglichen: S. 8–9, 19–25 und 40–44. [Originalpublikation (englisch)](https://doi.org/10.1787/65cd27d4-en). Der dokumentierte Abgleich und die didaktischen Konsequenzen stehen in [AILIT-ABGLEICH.md](./AILIT-ABGLEICH.md).
 - [KI Explained](https://schmij03.github.io/ki-explained/). Didaktische Inspiration auf Grundlage der bereitgestellten Beschreibung. Eigenständige Umsetzung; kein kopierter Quellcode.
 
 Die beiden Kompetenzrahmen und ihre Progressionsstufen werden nicht gleichgesetzt. Die Selbsteinschätzung 1–4 ist keine Zuordnung zu den Modellniveaus I–III.
@@ -116,3 +116,5 @@ Quellen: Code.org/CodeAI, Soekia, Quick, Draw!, AI Unplugged (bereitgestellte Br
 `unterrichtsideen.css` ergänzt die vorhandene Gestaltung und die Druckansicht. `unterrichtsideen.js` steuert Filter und Einzeldruck; ohne JavaScript bleiben alle Ideen lesbar. Der AI-for-Oceans-Direkteinstieg zeigte beim Quellenabruf eine Zugangsmeldung. Kurs und Schulzugänge müssen vor Unterrichtseinsatz geprüft werden.
 
 Prüfung der Ergänzung: `node ideen-checks.cjs` prüft kombinierte Filter, Suche, leere Ergebnisse, Zurücksetzen, Wiederherstellung geöffneter Abschnitte nach dem Druck, eindeutige IDs und lokale Links. Diese Prüfung und die 338 bestehenden Prüfungen sind erfolgreich. Ein echter Browser war nicht verfügbar (Chromium-Binärdatei fehlt); visuelle Mobil- und Drucklayoutprüfungen der Ergänzung stehen aus. Die externen interaktiven Angebote wurden inhaltlich recherchiert, nicht vollständig auf Schulgeräten durchgespielt.
+
+«Mitgestalten» bezeichnet die begründete Entwicklung, Erprobung und Verbesserung von KI-Systemen oder ihrer Nutzung. Startseite, Kompetenzkompass und Modelleinsicht verwenden diesen konkreten Bezug. Die Modelleinsicht unterscheidet gemeinsame Nutzungsgestaltung nach Alles et al. von der systembezogenen Perspektive des AILit-Rahmens, die auch Kriterienbildung und Verbesserungsvorschläge ohne Programmierung umfasst.
