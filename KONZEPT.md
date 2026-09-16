@@ -59,3 +59,8 @@ Jedes Kapitel beginnt mit einem konkreten Lernbeleg und bietet Sprungmarken. Die
 Das Obstdiagramm macht Abstände sichtbar, während Tabelle und Textausgabe die vollständige Information erhalten. Die Tokenpfade berücksichtigen nun ihren vollständigen Beispielkontext: sprachliche Fehler durch unverbundene Satzteile lenken nicht mehr vom Unterschied zwischen Plausibilität und Wahrheit ab. Weiterhin handelt es sich ausdrücklich um ein handgeschriebenes Spielzeugmodell.
 
 Bei der Aufgabenwahl und beim Umbenennen von Kartengruppen werden vorhandene eigene Texte nicht überschrieben. Der Canvas zeigt ein konkretes Beispiel für die Beziehung zwischen Lernziel, Lernbeleg und Qualitätskriterium. Die ergänzenden Selbsttests sind auch druckbar.
+
+
+## Eigene Seite für Unterrichtsideen
+
+Die Sammlung ergänzt die acht Kapitel als frei zugänglicher Transferbereich. Jede Karte verbindet eine beobachtbare Lernleistung mit Vorbereitung, Ablauf, Differenzierung und Quelle. Suche sowie Filter nach Stufe, Ausstattung und Kompetenz helfen bei der Auswahl. Die Stufen sind didaktische Vorschläge, keine Ableitung von Kompetenzniveaus. Über den Canvas-Link wird die eigene Planung fortgesetzt; bestehende Notizen bleiben unberührt. Einzeldruck ermöglicht die Nutzung als Unterrichtsvorbereitung. Original-PDFs und Grafiken werden nicht erneut veröffentlicht.

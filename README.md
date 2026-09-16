@@ -105,3 +105,14 @@ JavaScript-Syntax und 338 Logik-/Strukturprüfungen wurden erfolgreich ausgefüh
 Die Prüfungen sind als `checks.cjs` enthalten und können mit `node checks.cjs` erneut ausgeführt werden. Zusätzlich wurden die erzeugten Kapitel- und Druckinhalte auf eindeutige IDs, passende Formularbeschriftungen, Sprungmarken und lokale Links geprüft.
 
 Die Funktionsprüfungen verwenden einen DOM-Ersatz. Ein echter Browser konnte in der Bearbeitungsumgebung nicht gestartet werden; auch der Download eines Testbrowsers war nicht erreichbar. Visuelle Mobil- und Drucklayoutprüfungen stehen daher aus.
+
+
+## Unterrichtsideen
+
+`unterrichtsideen.html` ergänzt den Lernweg um neun konkrete Aktivitäten mit Lernzielen, Vorbereitung, Zeitvorschlägen, Abläufen, Differenzierung, Kompetenzbezügen und Lernbelegen. Filter nach Thema, Stufe, Ausstattung und Kompetenz helfen bei der Auswahl. Jede Idee lässt sich einzeln drucken; die Verlinkung zum bestehenden Canvas öffnet die Planung, ohne vorhandene Eingaben zu überschreiben. Die Seite ist von der Startseite, dem Materialmenü und passenden Kapiteln erreichbar.
+
+Quellen: Code.org/CodeAI, Soekia, Quick, Draw!, AI Unplugged (bereitgestellte Broschüre von Lindner/Seegerer) und IT2School (bereitgestelltes KI-Handbuch, insbesondere KI-B1 und KI-B2). Originalmaterialien werden verlinkt; die Unterrichtsabläufe sind eigene Adaptionen. Stufen und Zeitbudgets sind eigene Planungsvorschläge. Keine zusätzlichen Pflichtaktivitäten für die 120 Minuten.
+
+`unterrichtsideen.css` ergänzt die vorhandene Gestaltung und die Druckansicht. `unterrichtsideen.js` steuert Filter und Einzeldruck; ohne JavaScript bleiben alle Ideen lesbar. Der AI-for-Oceans-Direkteinstieg zeigte beim Quellenabruf eine Zugangsmeldung. Kurs und Schulzugänge müssen vor Unterrichtseinsatz geprüft werden.
+
+Prüfung der Ergänzung: `node ideen-checks.cjs` prüft kombinierte Filter, Suche, leere Ergebnisse, Zurücksetzen, Wiederherstellung geöffneter Abschnitte nach dem Druck, eindeutige IDs und lokale Links. Diese Prüfung und die 338 bestehenden Prüfungen sind erfolgreich. Ein echter Browser war nicht verfügbar (Chromium-Binärdatei fehlt); visuelle Mobil- und Drucklayoutprüfungen der Ergänzung stehen aus. Die externen interaktiven Angebote wurden inhaltlich recherchiert, nicht vollständig auf Schulgeräten durchgespielt.
