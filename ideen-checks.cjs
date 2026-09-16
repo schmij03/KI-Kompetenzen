@@ -1,0 +1,30 @@
+/* Logic checks for filtering and print-state restoration; not a browser layout test. */
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const html=fs.readFileSync(path.join(__dirname,'unterrichtsideen.html'),'utf8');
+const script=fs.readFileSync(path.join(__dirname,'unterrichtsideen.js'),'utf8');
+const classes=()=>{const s=new Set();return{add:x=>s.add(x),remove:x=>s.delete(x),contains:x=>s.has(x)}};
+const nodes=new Map(),windowEvents={};
+function node(id){if(!nodes.has(id))nodes.set(id,{value:'',hidden:false,textContent:'',events:{},addEventListener(n,fn){this.events[n]=fn}});return nodes.get(id)}
+const cards=[...html.matchAll(/<article class="idea card" id="([^"]+)" data-stage="([^"]+)" data-mode="([^"]+)" data-domains="([^"]+)">([\s\S]*?)<\/article>/g)].map(m=>({id:m[1],dataset:{stage:m[2],mode:m[3],domains:m[4]},textContent:m[5].replace(/<[^>]*>/g,' '),hidden:false,classList:classes(),details:[{open:false}],querySelectorAll(){return this.details}}));
+assert.equal(cards.length,9);
+cards.forEach(c=>nodes.set(c.id,c));
+const buttons=cards.map(card=>({dataset:{print:card.id},events:{},addEventListener(n,fn){this.events[n]=fn}}));
+const body={classList:classes()};let printCalls=0;
+vm.runInNewContext(script,{document:{body,getElementById:node,querySelectorAll:s=>s==='.idea'?cards:buttons},window:{addEventListener:(n,fn)=>windowEvents[n]=fn,print:()=>printCalls++}});
+const visible=()=>cards.filter(c=>!c.hidden).map(c=>c.id);
+assert.equal(visible().length,9);
+node('mode').value='Ohne Geräte';node('domain').value='Mitgestalten';node('filters').events.change();
+assert.deepEqual(visible(),['baum','regeln']);
+node('stage').value='Zyklus 2';node('filters').events.change();assert.deepEqual(visible(),['baum']);
+node('search').value='zzzznichtvorhanden';node('filters').events.input();assert.equal(visible().length,0);assert.equal(node('empty').hidden,false);
+node('filters').events.reset();assert.equal(visible().length,9);assert.equal(node('empty').hidden,true);
+node('search').value='SOEKIA';node('filters').events.input();assert.deepEqual(visible(),['soekia']);
+node('filters').events.reset();cards[0].details[0].open=true;
+buttons[1].events.click();assert.equal(printCalls,1);assert.equal(body.classList.contains('print-one'),true);assert.equal(cards[1].classList.contains('print-target'),true);assert(cards.every(c=>c.details[0].open));
+windowEvents.afterprint();assert.equal(body.classList.contains('print-one'),false);assert.equal(cards[0].details[0].open,true);assert.equal(cards[1].details[0].open,false);
+windowEvents.beforeprint();assert(cards.every(c=>c.details[0].open));windowEvents.afterprint();assert.equal(cards[1].details[0].open,false);
+const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
+for(const m of html.matchAll(/href="\.\/([^"?#]+)(?:[?#][^"]*)?"/g))assert(fs.existsSync(path.join(__dirname,m[1])),m[1]);
+for(const m of html.matchAll(/href="#([^"]+)"/g))assert(ids.includes(m[1]),m[1]);
+console.log('Unterrichtsideen: combined filters, search, empty/reset states, print restoration, IDs and local links passed.');
