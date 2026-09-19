@@ -2,7 +2,7 @@
 const form=document.getElementById('filters');
 const cards=[...document.querySelectorAll('.idea')];
 const search=document.getElementById('search');
-const stage=document.getElementById('stage');
+const subject=document.getElementById('subject');
 const mode=document.getElementById('mode');
 const domain=document.getElementById('domain');
 const searchable=new Map(cards.map(card=>[card,card.textContent.toLocaleLowerCase('de-CH')]));
@@ -10,7 +10,7 @@ function filterIdeas(){
  const terms=search.value.trim().toLocaleLowerCase('de-CH').split(/\s+/).filter(Boolean);
  let count=0;
  for(const card of cards){
-  const match=terms.every(term=>searchable.get(card).includes(term))&&(!stage.value||card.dataset.stage===stage.value)&&(!mode.value||card.dataset.mode===mode.value)&&(!domain.value||card.dataset.domains.split(' ').includes(domain.value));
+  const match=terms.every(term=>searchable.get(card).includes(term))&&(!subject.value||card.dataset.subjects.split('|').includes(subject.value))&&(!mode.value||card.dataset.mode===mode.value)&&(!domain.value||card.dataset.domains.split(' ').includes(domain.value));
   card.hidden=!match;if(match)count++;
  }
  document.getElementById('result-count').textContent=count+' von '+cards.length+' Unterrichtsideen';
@@ -20,7 +20,7 @@ form.hidden=false;
 form.addEventListener('input',filterIdeas);
 form.addEventListener('change',filterIdeas);
 form.addEventListener('submit',event=>event.preventDefault());
-form.addEventListener('reset',()=>{search.value='';stage.value='';mode.value='';domain.value='';filterIdeas()});
+form.addEventListener('reset',()=>{search.value='';subject.value='';mode.value='';domain.value='';filterIdeas()});
 let savedDetails=null;
 function openPrintDetails(){
  if(savedDetails)return;

@@ -2,7 +2,7 @@
 
 ## Lernversprechen
 
-Lehrpersonen erleben KI als Lerngegenstand, Werkzeug und Reflexionsanlass. Am Ende steht eine kleine eigene Unterrichtsaktivität mit beobachtbarem Lernbeleg.
+Lehrpersonen der Sekundarstufe I erleben KI als Lerngegenstand, Werkzeug und Reflexionsanlass. Am Ende steht eine kleine eigene Unterrichtsaktivität für den Zyklus 3 mit beobachtbarem Lernbeleg.
 
 ## Ablauf innerhalb eines Kapitels
 
@@ -55,6 +55,10 @@ Druckpaket: Kompass, Experimentprotokoll, Prompting-Aufträge, Prüftabelle, zw�
 Der Moderationsleitfaden liegt als eigene Seite neben der Lernumgebung, nicht in den Kapiteln. So bleibt die Lernumgebung ohne Zeitvorgaben nutzbar, während eine geleitete Durchführung trotzdem einen belastbaren Ablauf hat. Die neun Phasen decken nicht jedes Kapitel vollständig ab; der Canvas wird begonnen und danach selbstständig fertiggestellt. Der Beamermodus lädt dieselbe Inhaltsquelle und blendet aus, was nur am eigenen Gerät gebraucht wird. Dadurch kann keine zweite, abweichende Fassung der Simulationen entstehen.
 
 Die Einstiegsübung «KI oder nicht KI» ersetzt eine statische Aufzählung. Zwei der sechs Fälle sind bewusst nicht entscheidbar: Die Erkenntnis, dass eine Oberfläche das Verfahren meistens nicht verrät, ist der Lerninhalt. Es gibt deshalb keine Punktzahl und keine Richtig-falsch-Rückmeldung, sondern eine Einordnung mit Begründung.
+
+## Zielstufe
+
+Die Lernumgebung richtet sich an Lehrpersonen der Sekundarstufe I. Unterrichtsbeispiele, Fachbezeichnungen und Unterrichtsideen folgen dem Zyklus 3. Differenziert wird innerhalb dieser Stufe über Grundanspruch und erweiterte Anforderung; Verweise auf Primarstufe oder Sek II werden vermieden, weil sie die Auswahl verwässern statt sie zu schärfen. Wo Originalmaterialien für andere Altersgruppen entwickelt wurden, sind Auswertung und Lernbeleg angepasst, nicht bloss der Stufenhinweis.
 
 ## Abgrenzungen
 

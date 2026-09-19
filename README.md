@@ -1,6 +1,6 @@
 # KI verstehen · Unterricht gestalten
 
-Interaktive, deutschsprachige Lernumgebung für Lehrpersonen ohne feste Zeitvorgaben.
+Interaktive, deutschsprachige Lernumgebung für Lehrpersonen der Sekundarstufe I, ohne feste Zeitvorgaben. Alle Unterrichtsbeispiele und Unterrichtsideen sind auf den Zyklus 3 ausgelegt.
 
 **KI benutzen ≠ KI-kompetent sein.** Entscheidend ist, was Lernende nach der Unterstützung durch KI selbst erklären, beurteilen, entscheiden oder gestalten können.
 
@@ -130,9 +130,9 @@ Offen bleibt: Die Prüfung erfolgte nur in Chromium, nicht in Safari oder Firefo
 
 ## Unterrichtsideen
 
-`unterrichtsideen.html` ergänzt den Lernweg um neun konkrete Aktivitäten mit Lernzielen, Vorbereitung, Zeitvorschlägen, Abläufen, Differenzierung, Kompetenzbezügen und Lernbelegen. Filter nach Thema, Stufe, Ausstattung und Kompetenz helfen bei der Auswahl. Jede Idee lässt sich einzeln drucken; die Verlinkung zum bestehenden Canvas öffnet die Planung, ohne vorhandene Eingaben zu überschreiben. Die Seite ist von der Startseite, dem Materialmenü und passenden Kapiteln erreichbar.
+`unterrichtsideen.html` ergänzt den Lernweg um neun konkrete Aktivitäten für den Zyklus 3 mit Lernzielen, Vorbereitung, Zeitvorschlägen, Abläufen, Differenzierung, Kompetenzbezügen und Lernbelegen. Filter nach Stichwort, Fach, Ausstattung und Kompetenz helfen bei der Auswahl. Die Differenzierung läuft über Grundanspruch und erweiterte Anforderung innerhalb der Sek I, nicht über Verweise auf Nachbarstufen. Jede Idee lässt sich einzeln drucken; die Verlinkung zum bestehenden Canvas öffnet die Planung, ohne vorhandene Eingaben zu überschreiben. Die Seite ist von der Startseite, dem Materialmenü und passenden Kapiteln erreichbar.
 
-Quellen: Code.org/CodeAI, Soekia, Quick, Draw!, AI Unplugged (bereitgestellte Broschüre von Lindner/Seegerer) und IT2School (bereitgestelltes KI-Handbuch, insbesondere KI-B1 und KI-B2). Originalmaterialien werden verlinkt; die Unterrichtsabläufe sind eigene Adaptionen. Stufen und Zeitbudgets sind eigene Planungsvorschläge. Keine zusätzlichen Pflichtaktivitäten für die 120 Minuten.
+Quellen: Code.org/CodeAI, Soekia, Quick, Draw!, AI Unplugged (bereitgestellte Broschüre von Lindner/Seegerer) und IT2School (bereitgestelltes KI-Handbuch, insbesondere KI-B1 und KI-B2). Originalmaterialien werden verlinkt; die Unterrichtsabläufe sind eigene Adaptionen für den Zyklus 3. Mehrere Originalangebote richten sich an eine breitere Altersspanne; Anspruch, Auswertung und Lernbeleg wurden entsprechend angehoben oder abgesenkt. Fachzuordnungen und Zeitbudgets sind eigene Planungsvorschläge. Keine zusätzlichen Pflichtaktivitäten für die 120 Minuten.
 
 `unterrichtsideen.css` ergänzt die vorhandene Gestaltung und die Druckansicht. `unterrichtsideen.js` steuert Filter und Einzeldruck; ohne JavaScript bleiben alle Ideen lesbar. Der AI-for-Oceans-Direkteinstieg zeigte beim Quellenabruf eine Zugangsmeldung. Kurs und Schulzugänge müssen vor Unterrichtseinsatz geprüft werden.
 
