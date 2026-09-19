@@ -174,8 +174,9 @@ assert(api.journalText().includes("Teachable Machine:")&&api.journalText().inclu
 assert(api.materialsHTML().includes("Zusatzaufgabe · Teachable Machine"),"optional task printable");
 // Stale cache keys would serve an old stylesheet or script after an update.
 const assetHash=file=>require("node:crypto").createHash("sha256").update(fs.readFileSync(require("node:path").join(__dirname,file))).digest("hex").slice(0,12);
-for(const[page,markup]of[["index.html",landing],["lernen.html",html]]){
- const references=[...markup.matchAll(/\.\/([\w.-]+\.(?:css|js))\?v=([0-9a-f]{12})/g)];
+const ideas=fs.readFileSync(require("node:path").join(__dirname,"unterrichtsideen.html"),"utf8");
+for(const[page,markup]of[["index.html",landing],["lernen.html",html],["unterrichtsideen.html",ideas]]){
+ const references=[...markup.matchAll(/\.\/([\w.-]+\.(?:css|js))\?v=([^"'\s>]+)/g)];
  assert(references.length>0,"versioned assets referenced in "+page);
  for(const[,file,key]of references)assert(key===assetHash(file),"cache key for "+file+" in "+page+" matches the file");
 }
