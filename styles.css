@@ -26,7 +26,7 @@
 .quiz .check{border:1px solid var(--line);border-radius:8px;padding:.8rem;font-weight:400}
 .quiz .check:has(input:checked){border-color:var(--brand);background:#eef7f7}
 #fruitChart svg{display:block;width:100%;max-width:780px;height:auto;margin:auto}
-#fruitChart svg text{font:14px system-ui,sans-serif;fill:var(--ink)}
+#fruitChart svg text{font-family:system-ui,sans-serif;fill:var(--ink)}
 h2,[tabindex="-1"]{scroll-margin-top:1.5rem}
 textarea{min-height:100px;line-height:1.55}
 .status:empty{min-height:0;margin:.4rem 0}
@@ -96,6 +96,9 @@ textarea{min-height:100px;line-height:1.55}
  .tag{background:#edf3e7;border:0;color:#456443;font-size:.71rem;font-weight:650;padding:.35rem .65rem}
  .output{background:#eff4ed;border:1px solid #dce6d7;border-radius:12px;padding:1.1rem;font-size:1rem}
  .prompt-text{background:#f4f6ef;border-color:#9fb18a;border-radius:0 10px 10px 0}
+ blockquote{margin:1.2rem 0 0;padding:1.1rem 1.3rem;border-left:3px solid #769a66;background:#f4f7ef;border-radius:0 12px 12px 0}
+ blockquote p:first-child{font-size:1.05rem;line-height:1.55;font-weight:500;margin-bottom:.5rem}
+ blockquote p:last-child{margin-bottom:0}
  .canvas-review{padding:1.3rem;border-radius:12px;background:#f5f7f1}
  details{margin:1rem 0}
  summary{font-size:.9rem;padding:.6rem 0;color:#3d6652}

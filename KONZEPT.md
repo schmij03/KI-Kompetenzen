@@ -39,6 +39,8 @@ Ruhige Arbeitsoberfläche mit dunkler petrolfarbener Typografie, warmem Hintergr
 - Prompting bietet drei frei wählbare Aufträge zu Kontext, Quellenprüfung und Perspektiven.
 - Nicht jeder KI-Einsatz bildet automatisch alle vier Bereiche. Fachliches Verständnis ist nicht automatisch Verständnis der KI-Funktionsweise.
 - Niveaustufen werden anhand der Originalmatrix begründet, nicht aus Selbsteinschätzung oder Promptlänge abgeleitet.
+- Der AILit-Rahmen wird als ergänzende Perspektive geführt, nicht als zweites Raster zum Ausfüllen. Seine drei Progressionsstufen bleiben von den Niveaus I–III getrennt, weil die Publikation sie ausdrücklich nicht an Altersgruppen oder Klassenstufen bindet.
+- Der Ressourcenverbrauch von KI erscheint als Prüffrage vor dem Übernehmen eines Outputs, nicht als eigenes Umweltkapitel. Die Entscheidung über den Einsatz bleibt damit dort, wo sie im Ablauf ohnehin getroffen wird.
 - Gallery Walk enthält eine verbindliche Überarbeitung.
 - Die abschliessende Selbsteinschätzung braucht einen konkreten Beleg.
 
@@ -56,7 +58,7 @@ Keine eingebaute Chatbot-Schnittstelle und keine automatisierte Bewertung von Ko
 
 Jedes Kapitel beginnt mit einem konkreten Lernbeleg und bietet Sprungmarken. Die mobile Navigation reduziert die Fläche vor der eigentlichen Tätigkeit. Selbsttests unterstützen die eigene Prüfung; sie sind keine automatische Kompetenzmessung.
 
-Das Obstdiagramm macht Abstände sichtbar, während Tabelle und Textausgabe die vollständige Information erhalten. Die Tokenpfade berücksichtigen nun ihren vollständigen Beispielkontext: sprachliche Fehler durch unverbundene Satzteile lenken nicht mehr vom Unterschied zwischen Plausibilität und Wahrheit ab. Weiterhin handelt es sich ausdrücklich um ein handgeschriebenes Spielzeugmodell.
+Das Obstdiagramm macht Abstände sichtbar, während Tabelle und Textausgabe die vollständige Information erhalten. Seine Achse folgt den vorhandenen Beispielen, damit ein ergänztes Beispiel als eigener Punkt erkennbar bleibt und nicht in einem festen Wertebereich verschwindet. Die Tokenpfade berücksichtigen nun ihren vollständigen Beispielkontext: sprachliche Fehler durch unverbundene Satzteile lenken nicht mehr vom Unterschied zwischen Plausibilität und Wahrheit ab. Weiterhin handelt es sich ausdrücklich um ein handgeschriebenes Spielzeugmodell.
 
 Bei der Aufgabenwahl und beim Umbenennen von Kartengruppen werden vorhandene eigene Texte nicht überschrieben. Der Canvas zeigt ein konkretes Beispiel für die Beziehung zwischen Lernziel, Lernbeleg und Qualitätskriterium. Die ergänzenden Selbsttests sind auch druckbar.
 

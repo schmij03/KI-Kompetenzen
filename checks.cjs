@@ -22,7 +22,7 @@ function harness(saved=null,search="",options={}){
   pushState(data,title,url){if(options.historyFails)throw Error("History blocked");historyEntries.splice(++position);historyEntries[position]=url;window.location=new URL(url)},
   replaceState(data,title,url){if(options.historyFails)throw Error("History blocked");historyEntries[position]=url;window.location=new URL(url)}
  };
- const expose="\nreturn {get state(){return state},pages,chapterView,actions,fruitGuess,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,render,go,markDone};";
+ const expose="\nreturn {get state(){return state},pages,chapterView,actions,fruitGuess,fruitDomain,fruitTicks,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,render,go,markDone};";
  const api=new Function("document","localStorage","window","confirm",source+expose)(document,localStorage,window,()=>options.confirmClear!==false);
  return{api,node,events,windowEvents,window,saved:()=>stored,writes:()=>writes,
  back(){if(position>0){window.location=new URL(historyEntries[--position]);(windowEvents.popstate||[]).forEach(fn=>fn())}},
@@ -46,6 +46,14 @@ assert(api.fruitGuess([...api.baseFruit,{w:160,t:"Birne"},{w:160,t:"Apfel"}],160
 assert(api.fruitGuess([],160).label==="keine Trainingsdaten","empty model");
 node("fruitWeight").value="160";node("threshold").value="140";api.updateFruit();
 assert(node("fruitChart").innerHTML.includes('role="img"'),"accessible fruit chart");
+assert(node("fruitChart").innerHTML.includes("Gewicht in Gramm"),"fruit chart labels its axis");
+const padded=api.fruitDomain([110,180]);
+assert(padded.lo<110&&padded.hi>180,"chart domain pads the data range");
+const flat=api.fruitDomain([160]);
+assert(flat.hi>flat.lo,"identical weights still span a drawable range");
+assert(api.fruitTicks(padded.lo,padded.hi).every(t=>t>=padded.lo&&t<=padded.hi),"ticks stay inside the domain");
+assert(api.fruitTicks(105,190).length>1&&api.fruitTicks(105,190).length<=7,"tick count stays readable");
+assert(api.fruitTicks(100,2000).length<=7,"wide ranges do not flood the axis");
 node("newWeight").value="160";node("newType").value="Birne";api.addFruit();
 assert(node("fruitResult").innerHTML.includes("Birne"),"add example");
 api.undoFruit();assert(node("fruitResult").innerHTML.includes("Apfel"),"undo example");
@@ -164,4 +172,12 @@ api.put("group1","Quellen prüfen");api.put("sort0","1");api.put("tm_test","Stif
 assert(api.journalText().includes("Quellen prüfen"),"journal includes group names");
 assert(api.journalText().includes("Teachable Machine:")&&api.journalText().includes("Stift auf dunklem Papier"),"optional task exported");
 assert(api.materialsHTML().includes("Zusatzaufgabe · Teachable Machine"),"optional task printable");
-console.log(assertions+" logic and markup checks passed. Browser and print layout remain untested.");
+// Stale cache keys would serve an old stylesheet or script after an update.
+const assetHash=file=>require("node:crypto").createHash("sha256").update(fs.readFileSync(require("node:path").join(__dirname,file))).digest("hex").slice(0,12);
+const ideas=fs.readFileSync(require("node:path").join(__dirname,"unterrichtsideen.html"),"utf8");
+for(const[page,markup]of[["index.html",landing],["lernen.html",html],["unterrichtsideen.html",ideas]]){
+ const references=[...markup.matchAll(/\.\/([\w.-]+\.(?:css|js))\?v=([^"'\s>]+)/g)];
+ assert(references.length>0,"versioned assets referenced in "+page);
+ for(const[,file,key]of references)assert(key===assetHash(file),"cache key for "+file+" in "+page+" matches the file");
+}
+console.log(assertions+" logic and markup checks passed. Layout was additionally verified in Chromium; see README.");
