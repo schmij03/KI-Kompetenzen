@@ -1,0 +1,51 @@
+.plan-page main{max-width:1100px;margin:auto;padding:3rem 2rem}
+.plan-nav{display:flex;flex-wrap:wrap;gap:1.2rem;margin:0}
+.plan-nav a{font-size:.95rem}
+.plan-nav [aria-current]{font-weight:750;color:var(--ink)}
+.plan-hero{padding:2rem 0 2.5rem;max-width:800px}
+.plan-hero h1{font-size:clamp(2.3rem,5vw,4rem)}
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;border-block:1px solid var(--line);padding:1.5rem 0;margin-bottom:3rem}
+.principles strong{color:var(--brand);display:block;margin-bottom:.4rem}
+.principles p{margin:0;font-size:.95rem}
+.overview td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:650}
+.overview .break td{background:#f2f5ee;font-style:italic}
+.phase{border-top:4px solid var(--brand);padding:1.7rem;scroll-margin-top:1rem}
+.phase.pause{border-top-color:var(--line);background:#f7f9f4}
+.phase-time{font-size:.75rem;letter-spacing:.1em;color:var(--muted);font-weight:700;margin-bottom:.8rem;font-variant-numeric:tabular-nums}
+.phase h2{font-size:1.5rem;max-width:26ch}
+.phase-goal{font-size:1.02rem}
+.phase dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.6rem 1.2rem;margin:1.2rem 0 0;font-size:.95rem}
+.phase dt{font-weight:650;color:var(--brand);white-space:nowrap}
+.phase dd{margin:0}
+.phase .say{border-left:3px solid #9fb18a;padding:.6rem 0 .6rem 1rem;margin:1.2rem 0 0;font-style:italic}
+.phase-grid{display:grid;gap:1.3rem}
+.checklist{list-style:none;padding:0}
+.checklist li{padding-left:2rem;position:relative;margin-bottom:.7rem}
+.checklist li::before{content:"☐";position:absolute;left:0;font-size:1.2rem;line-height:1.3}
+@media(max-width:800px){
+ .plan-page header{align-items:flex-start;flex-direction:column}
+ .plan-page main{padding:1.5rem 1rem}
+ .principles{grid-template-columns:1fr;gap:1rem}
+ .phase{padding:1.2rem}
+ .phase dl{grid-template-columns:1fr;gap:.2rem .8rem}
+ .phase dt{margin-top:.7rem}
+ .plan-nav{gap:.8rem}
+ .plan-hero{padding-top:1rem}
+ .overview{font-size:.85rem}
+ .tablewrap{margin-bottom:1rem}
+}
+@media print{
+ .tablewrap{overflow:visible}
+ .plan-page header,.plan-hero .actions,.plan-page footer,.print-hint{display:none!important}
+ .plan-page main{max-width:none;padding:0}
+ .plan-hero{padding:0 0 6mm}
+ .plan-hero h1{font-size:22pt}
+ .principles{gap:6mm;padding:3mm 0;margin-bottom:6mm}
+ .phase{border:0;border-top:1pt solid #999;padding:3mm 0;break-inside:avoid}
+ .phase h2{font-size:13pt;max-width:none}
+ .phase p,.phase dd,.phase dt,.phase li{font-size:9.5pt;line-height:1.35}
+ .phase dl{margin-top:2mm;gap:.2mm 4mm}
+ .overview{break-inside:avoid}
+ .plan-section{break-before:page}
+ a{text-decoration:none}
+}

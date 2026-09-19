@@ -102,6 +102,18 @@ for(let i=0;i<api.quizzes.length;i++){
  assert(node("quizFeedback"+i).hidden&&!api.val("quizChecked"+i),"changing answer clears stale feedback");
  api.checkQuiz(i);assert(node("quizFeedback"+i).textContent.startsWith("Prüfe"),"incorrect answer explains");
 }
+const opening=harness(null,"?kapitel=0").api;
+assert(!opening.pages[0]().includes("Unsere Einordnung"),"opening exercise hides its resolution first");
+assert((opening.pages[0]().match(/data-key="alltag\d"/g)||[]).length===6,"six everyday cases to classify");
+opening.put("alltag0","regel");
+opening.actions.revealAlltag();
+assert(opening.pages[0]().includes("Unsere Einordnung"),"resolution appears after the reveal");
+assert(opening.val("alltag0")==="regel","reveal keeps the chosen answers");
+assert(opening.journalText().includes("KI oder nicht KI: "),"opening exercise reaches the journal");
+assert(api.materialsHTML().includes("KI oder nicht KI"),"opening exercise is printable");
+const badOpening=harness(JSON.stringify({answers:{alltag0:"unsinn",alltag1:"offen",alltagOpen:"ja"},chapter:0,done:[]})).api;
+assert(badOpening.val("alltag0")===""&&badOpening.val("alltagOpen")==="","invalid opening answers removed");
+assert(badOpening.val("alltag1")==="offen","valid opening answers kept");
 api.put("verbesserteaufgabe","Meine vorhandene Überarbeitung");api.chooseTask(2);
 assert(api.val("taskwahl").startsWith("Geschichte"),"select task");
 assert(api.val("verbesserteaufgabe")==="Meine vorhandene Überarbeitung","preserve own work");
@@ -172,10 +184,20 @@ api.put("group1","Quellen prüfen");api.put("sort0","1");api.put("tm_test","Stif
 assert(api.journalText().includes("Quellen prüfen"),"journal includes group names");
 assert(api.journalText().includes("Teachable Machine:")&&api.journalText().includes("Stift auf dunklem Papier"),"optional task exported");
 assert(api.materialsHTML().includes("Zusatzaufgabe · Teachable Machine"),"optional task printable");
+// The projection view reuses app.js, so it has to keep the elements app.js writes into.
+const demo=fs.readFileSync(require("node:path").join(__dirname,"demo.html"),"utf8");
+for(const id of ["nav","main","progress","progressText","paper"])assert(demo.includes('id="'+id+'"'),"projection view keeps #"+id+" for app.js");
+assert(demo.includes('src="./app.js'),"projection view loads app.js");
+// Local links must point at files that exist.
+for(const page of ["index.html","lernen.html","unterrichtsideen.html","ablauf.html","demo.html"]){
+ const markup=fs.readFileSync(require("node:path").join(__dirname,page),"utf8");
+ for(const m of markup.matchAll(/(?:href|src)="\.\/([^"#?]+)/g))
+  assert(m[1]===""||fs.existsSync(require("node:path").join(__dirname,m[1])),"local link ./"+m[1]+" in "+page+" exists");
+}
 // Stale cache keys would serve an old stylesheet or script after an update.
 const assetHash=file=>require("node:crypto").createHash("sha256").update(fs.readFileSync(require("node:path").join(__dirname,file))).digest("hex").slice(0,12);
-const ideas=fs.readFileSync(require("node:path").join(__dirname,"unterrichtsideen.html"),"utf8");
-for(const[page,markup]of[["index.html",landing],["lernen.html",html],["unterrichtsideen.html",ideas]]){
+const read=file=>fs.readFileSync(require("node:path").join(__dirname,file),"utf8");
+for(const[page,markup]of["unterrichtsideen.html","ablauf.html","demo.html"].map(f=>[f,read(f)]).concat([["index.html",landing],["lernen.html",html]])){
  const references=[...markup.matchAll(/\.\/([\w.-]+\.(?:css|js))\?v=([^"'\s>]+)/g)];
  assert(references.length>0,"versioned assets referenced in "+page);
  for(const[,file,key]of references)assert(key===assetHash(file),"cache key for "+file+" in "+page+" matches the file");
