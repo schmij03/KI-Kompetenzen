@@ -1,0 +1,60 @@
+/* Projection view: the same chapters, stripped to what a room can read from a distance. */
+@media screen{
+ body.demo{font-size:21px}
+ body.demo .shell{grid-template-columns:minmax(0,1fr);max-width:1700px}
+ body.demo aside{display:none}
+ body.demo header{padding:.8rem 1.6rem;gap:1.6rem;align-items:center}
+ body.demo .brand{font-size:.9rem;flex-shrink:0}
+ body.demo .brandmark{width:40px;height:40px;font-size:.85rem}
+ body.demo #nav{display:flex;flex-wrap:wrap;gap:.4rem;margin:0}
+ body.demo #nav button{flex:0 1 auto;padding:.45rem .7rem;font-size:.72rem;border-radius:8px;gap:.4rem}
+ body.demo #nav button span:not(.num){display:none}
+ body.demo #nav button[aria-current=step] span:not(.num){display:inline}
+ body.demo .num{min-width:22px;height:22px;font-size:.68rem}
+ body.demo main{padding:1.4rem 2.4rem 3rem}
+
+ /* Participant-only material has no place on a projector. */
+ body.demo .learning-goal,
+ body.demo .chapter-outline,
+ body.demo .quiz,
+ body.demo main>footer,
+ body.demo textarea,
+ body.demo label:has(+textarea),
+ body.demo details,
+ body.demo .status,
+ body.demo .optional,
+ body.demo p.small{display:none!important}
+
+ body.demo .chapter-hero{padding:1.4rem 2rem;margin-bottom:1rem;border-radius:16px}
+ body.demo .chapter-hero .eyebrow{margin-bottom:.5rem;font-size:.7rem}
+ body.demo h1{font-size:clamp(2.2rem,3.4vw,3rem);margin-bottom:0;max-width:none}
+ body.demo .lead{font-size:1.02rem;margin:.8rem 0 1rem}
+ body.demo h2{font-size:1.35rem}
+ body.demo .card{padding:1.5rem}
+ body.demo .grid{gap:1.4rem}
+
+ /* The parts the room actually has to read. */
+ body.demo .output{font-size:1.45rem;padding:1.2rem;min-height:0}
+ body.demo #fruitChart svg{max-width:none}
+ body.demo #fruitChart svg text{font-size:19px}
+ body.demo .meter{grid-template-columns:150px minmax(60px,1fr) 90px;gap:1rem;margin:.9rem 0}
+ body.demo .meter span{font-size:1.3rem;font-weight:600}
+ body.demo .bar{height:26px}
+ body.demo table{font-size:1.1rem}
+ body.demo th,body.demo td{padding:.6rem}
+ body.demo .note{font-size:1.05rem;padding:1.1rem 1.3rem}
+ body.demo ol,body.demo ul{font-size:1.05rem}
+ body.demo li{margin:.4rem 0}
+ body.demo input,body.demo select{font-size:1.15rem;padding:.6rem .8rem}
+ body.demo button,body.demo .button{font-size:1rem;padding:.7rem 1.1rem}
+ body.demo label{font-size:1rem}
+
+ .demo-hint{max-width:1700px;margin:0 auto;padding:0 2.4rem 2rem;font-size:.85rem;color:var(--muted)}
+}
+@media screen and (max-width:900px){
+ body.demo main{padding:1rem}
+ body.demo #nav button span:not(.num){display:none}
+ body.demo .grid{grid-template-columns:1fr}
+ .demo-hint{padding:0 1rem 1.5rem}
+}
+@media print{.demo-hint{display:none}}

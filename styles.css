@@ -96,6 +96,11 @@ textarea{min-height:100px;line-height:1.55}
  .tag{background:#edf3e7;border:0;color:#456443;font-size:.71rem;font-weight:650;padding:.35rem .65rem}
  .output{background:#eff4ed;border:1px solid #dce6d7;border-radius:12px;padding:1.1rem;font-size:1rem}
  .prompt-text{background:#f4f6ef;border-color:#9fb18a;border-radius:0 10px 10px 0}
+ .case{background:#fbfcf9;border-color:#dfe7dc}
+ .case-text{font-size:1.02rem;font-weight:500;margin-bottom:.2rem;min-height:3.2em}
+ .case label{margin-top:.6rem}
+ .resolution{margin:1rem 0 0;padding:.9rem 1rem;background:#eff5ea;border-radius:10px;font-size:.9rem;line-height:1.6}
+ .resolution strong{color:#2c5940}
  blockquote{margin:1.2rem 0 0;padding:1.1rem 1.3rem;border-left:3px solid #769a66;background:#f4f7ef;border-radius:0 12px 12px 0}
  blockquote p:first-child{font-size:1.05rem;line-height:1.55;font-weight:500;margin-bottom:.5rem}
  blockquote p:last-child{margin-bottom:0}

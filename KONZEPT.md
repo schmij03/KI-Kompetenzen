@@ -50,6 +50,12 @@ Die zentrale Inhaltsquelle ist app.js. Daraus werden Webseite, ausfüllbare und 
 
 Druckpaket: Kompass, Experimentprotokoll, Prompting-Aufträge, Prüftabelle, zwölf Karten, sechs Aufgaben, Verbesserungsraster, zweiseitiger Canvas, Feedbackkarten, Exit-Ticket und Quellen.
 
+## Durchführung in 120 Minuten
+
+Der Moderationsleitfaden liegt als eigene Seite neben der Lernumgebung, nicht in den Kapiteln. So bleibt die Lernumgebung ohne Zeitvorgaben nutzbar, während eine geleitete Durchführung trotzdem einen belastbaren Ablauf hat. Die neun Phasen decken nicht jedes Kapitel vollständig ab; der Canvas wird begonnen und danach selbstständig fertiggestellt. Der Beamermodus lädt dieselbe Inhaltsquelle und blendet aus, was nur am eigenen Gerät gebraucht wird. Dadurch kann keine zweite, abweichende Fassung der Simulationen entstehen.
+
+Die Einstiegsübung «KI oder nicht KI» ersetzt eine statische Aufzählung. Zwei der sechs Fälle sind bewusst nicht entscheidbar: Die Erkenntnis, dass eine Oberfläche das Verfahren meistens nicht verrät, ist der Lerninhalt. Es gibt deshalb keine Punktzahl und keine Richtig-falsch-Rückmeldung, sondern eine Einordnung mit Begründung.
+
 ## Abgrenzungen
 
 Keine eingebaute Chatbot-Schnittstelle und keine automatisierte Bewertung von Kompetenz. Kein allgemeiner Informatikkurs. Keine gemeinsame Cloud-Sammlung von Teilnehmerdaten. Keine Gleichsetzung des Vier-Bereiche-Modells mit AILit. Keine übernommenen Originalgrafiken ohne separat geprüfte Verwendung.
