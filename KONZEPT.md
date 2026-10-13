@@ -80,3 +80,7 @@ Die Sammlung ergänzt die acht Kapitel als frei zugänglicher Transferbereich. J
 ## AILit-Abgleich und Mitgestalten
 
 Die deutsche Original-PDF 2026 wurde für die relevanten Aussagen ausgewertet (siehe AILIT-ABGLEICH.md). Die Modelleinsicht verbindet Wissen, Fähigkeiten/Fertigkeiten und Haltungen mit den vier AILit-Bereichen. Progressionsstufen werden weder gleichgesetzt noch an Klassenstufen gebunden. «Mitgestalten» benötigt einen konkreten Gestaltungsgegenstand, Kriterien und begründete Entscheidungen. Die gemeinsame Gestaltung von Nutzungspraxis und die Untersuchung bzw. Verbesserung eines KI-Systems werden unterschieden. Beide können ohne Programmierung stattfinden. Quellenhinweise erscheinen auch im bestehenden Druckpaket.
+
+## IT2School-Module
+
+Die Gesamtausgabe der IT2School-KI-Module wird als erweitertes Angebot neben den Unterrichtsideen geführt: Ideen für einzelne Lektionen, die Modulseite für ganze Reihen. Die Seite bewertet die Module für den Zyklus 3, ohne Originalstufen zu übernehmen, und benennt veraltete Werkzeuge, fehlende Dateien und Datenschutzfragen. Zwei Lücken der bisherigen Sammlung, unüberwachtes Lernen und Verzerrung durch Trainingsdaten, werden durch neue Unterrichtsideen auf Grundlage von KI-B3.5 und KI-B4.4 geschlossen.

@@ -83,6 +83,7 @@ Browserdaten können gelöscht werden oder auf geteilten Geräten zugänglich bl
 - `app.js`: Inhalte, Simulationen, Formulare, Export, Druckmaterialien.
 - `KONZEPT.md`: Informationsarchitektur und didaktische Entscheidungen.
 - `unterrichtsideen.html`, `unterrichtsideen.css`, `unterrichtsideen.js`: Sammlung konkreter Unterrichtsideen mit Filtern und Einzeldruck.
+- `it2school.html`, `it2school.css`: erweitertes Angebot mit den sieben KI-Modulen von IT2School, eingeordnet für den Zyklus 3, mit vier Reihenvorschlägen. Nutzt zusätzlich `ablauf.css`.
 - `ablauf.html`, `ablauf.css`: Moderationsleitfaden für eine zweistündige Durchführung. Druckbar über den Browser.
 - `demo.html`, `demo.css`: Beamermodus. Lädt dieselbe `app.js` und blendet aus, was nur am eigenen Gerät gebraucht wird.
 - `AILIT-ABGLEICH.md`: dokumentierter Abgleich mit der AILit-Originalpublikation.
@@ -130,7 +131,7 @@ Offen bleibt: Die Prüfung erfolgte nur in Chromium, nicht in Safari oder Firefo
 
 ## Unterrichtsideen
 
-`unterrichtsideen.html` ergänzt den Lernweg um neun konkrete Aktivitäten für den Zyklus 3 mit Lernzielen, Vorbereitung, Zeitvorschlägen, Abläufen, Differenzierung, Kompetenzbezügen und Lernbelegen. Filter nach Stichwort, Fach, Ausstattung und Kompetenz helfen bei der Auswahl. Die Differenzierung läuft über Grundanspruch und erweiterte Anforderung innerhalb der Sek I, nicht über Verweise auf Nachbarstufen. Jede Idee lässt sich einzeln drucken; die Verlinkung zum bestehenden Canvas öffnet die Planung, ohne vorhandene Eingaben zu überschreiben. Die Seite ist von der Startseite, dem Materialmenü und passenden Kapiteln erreichbar.
+`unterrichtsideen.html` ergänzt den Lernweg um elf konkrete Aktivitäten für den Zyklus 3 mit Lernzielen, Vorbereitung, Zeitvorschlägen, Abläufen, Differenzierung, Kompetenzbezügen und Lernbelegen. Filter nach Stichwort, Fach, Ausstattung und Kompetenz helfen bei der Auswahl. Die Differenzierung läuft über Grundanspruch und erweiterte Anforderung innerhalb der Sek I, nicht über Verweise auf Nachbarstufen. Jede Idee lässt sich einzeln drucken; die Verlinkung zum bestehenden Canvas öffnet die Planung, ohne vorhandene Eingaben zu überschreiben. Die Seite ist von der Startseite, dem Materialmenü und passenden Kapiteln erreichbar.
 
 Quellen: Code.org/CodeAI, Soekia, Quick, Draw!, AI Unplugged (bereitgestellte Broschüre von Lindner/Seegerer) und IT2School (bereitgestelltes KI-Handbuch, insbesondere KI-B1 und KI-B2). Originalmaterialien werden verlinkt; die Unterrichtsabläufe sind eigene Adaptionen für den Zyklus 3. Mehrere Originalangebote richten sich an eine breitere Altersspanne; Anspruch, Auswertung und Lernbeleg wurden entsprechend angehoben oder abgesenkt. Fachzuordnungen und Zeitbudgets sind eigene Planungsvorschläge. Keine zusätzlichen Pflichtaktivitäten für die 120 Minuten.
 
@@ -139,3 +140,9 @@ Quellen: Code.org/CodeAI, Soekia, Quick, Draw!, AI Unplugged (bereitgestellte Br
 Prüfung der Ergänzung: `node ideen-checks.cjs` prüft kombinierte Filter, Suche, leere Ergebnisse, Zurücksetzen, Wiederherstellung geöffneter Abschnitte nach dem Druck, eindeutige IDs und lokale Links. Diese Prüfung und die 437 Prüfungen aus `checks.cjs` sind erfolgreich. Die Seite wurde inzwischen auch in Chromium geladen und auf 1440 px und 360 px geprüft. Die externen interaktiven Angebote wurden inhaltlich recherchiert, nicht auf Schulgeräten durchgespielt.
 
 «Mitgestalten» bezeichnet die begründete Entwicklung, Erprobung und Verbesserung von KI-Systemen oder ihrer Nutzung. Startseite, Kompetenzkompass und Modelleinsicht verwenden diesen konkreten Bezug. Die Modelleinsicht unterscheidet gemeinsame Nutzungsgestaltung nach Alles et al. von der systembezogenen Perspektive des AILit-Rahmens, die auch Kriterienbildung und Verbesserungsvorschläge ohne Programmierung umfasst.
+
+## IT2School-Module als erweitertes Angebot
+
+`it2school.html` ordnet alle sieben KI-Module von IT2School (KI-B1 bis KI-B4, KI-A1 bis KI-A3) für den Zyklus 3 ein: Übersichtstabelle, vier Reihen (ohne Geräte, Daten und Fairness, KI selbst bauen, Sprache und Assistenz), pro Modul die geeigneten Materialien, nötige Anpassungen, ein Lernbeleg, Kompetenzbereiche und die Verbindung zu Kapiteln und Unterrichtsideen. Dazu eine Checkliste für die Vorbereitung (fehlende Snap!-Projekte und Datensätze, veraltete Werkzeuge, Datenschutz).
+
+Aus der Gesamtausgabe neu abgeleitet sind zwei Unterrichtsideen: «Goldrausch: Gruppen finden ohne Etiketten» (unüberwachtes Lernen, KI-B3.5a/b) und «Wenn Trainingsdaten die Vergangenheit fortschreiben» (Verzerrungen, KI-B4.4). Die bestehenden Ideen verweisen nun auf konkrete IT2School-Materialnummern. Originaldateien werden nicht erneut veröffentlicht; Download bei der Wissensfabrik.
