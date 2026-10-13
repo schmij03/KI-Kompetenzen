@@ -189,7 +189,7 @@ const demo=fs.readFileSync(require("node:path").join(__dirname,"demo.html"),"utf
 for(const id of ["nav","main","progress","progressText","paper"])assert(demo.includes('id="'+id+'"'),"projection view keeps #"+id+" for app.js");
 assert(demo.includes('src="./app.js'),"projection view loads app.js");
 // Local links must point at files that exist.
-for(const page of ["index.html","lernen.html","unterrichtsideen.html","ablauf.html","demo.html"]){
+for(const page of ["index.html","lernen.html","unterrichtsideen.html","it2school.html","ablauf.html","demo.html"]){
  const markup=fs.readFileSync(require("node:path").join(__dirname,page),"utf8");
  for(const m of markup.matchAll(/(?:href|src)="\.\/([^"#?]+)/g))
   assert(m[1]===""||fs.existsSync(require("node:path").join(__dirname,m[1])),"local link ./"+m[1]+" in "+page+" exists");
@@ -197,7 +197,7 @@ for(const page of ["index.html","lernen.html","unterrichtsideen.html","ablauf.ht
 // Stale cache keys would serve an old stylesheet or script after an update.
 const assetHash=file=>require("node:crypto").createHash("sha256").update(fs.readFileSync(require("node:path").join(__dirname,file))).digest("hex").slice(0,12);
 const read=file=>fs.readFileSync(require("node:path").join(__dirname,file),"utf8");
-for(const[page,markup]of["unterrichtsideen.html","ablauf.html","demo.html"].map(f=>[f,read(f)]).concat([["index.html",landing],["lernen.html",html]])){
+for(const[page,markup]of["unterrichtsideen.html","it2school.html","ablauf.html","demo.html"].map(f=>[f,read(f)]).concat([["index.html",landing],["lernen.html",html]])){
  const references=[...markup.matchAll(/\.\/([\w.-]+\.(?:css|js))\?v=([^"'\s>]+)/g)];
  assert(references.length>0,"versioned assets referenced in "+page);
  for(const[,file,key]of references)assert(key===assetHash(file),"cache key for "+file+" in "+page+" matches the file");
