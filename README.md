@@ -60,7 +60,7 @@ Acht Kapitel verbinden Experimente, Reflexion und Unterrichtsgestaltung. Die Kap
 
 ## Für die Kursleitung
 
-`ablauf.html` enthält einen Moderationsleitfaden für 120 Minuten: Vorbereitung, neun Phasen mit Sozialform, Übergangssätzen und Stolperstellen sowie Vorschläge zum Kürzen und Erweitern. Der Leitfaden liegt bewusst neben der Lernumgebung, damit diese selbst ohne Zeitvorgaben nutzbar bleibt.
+`ablauf.html` enthält einen Moderationsleitfaden für 120 Minuten: Vorbereitung, neun Phasen mit Sozialform, Übergangssätzen, Stolperstellen und Verweisen auf die Folien des begleitenden Foliensatzes sowie Vorschläge zum Kürzen und Erweitern. Die Zeiten der Übersichtstabelle und der Phasenkarten werden von `checks.cjs` abgeglichen. Der Foliensatz selbst liegt nicht im Repository. Der Leitfaden liegt bewusst neben der Lernumgebung, damit diese selbst ohne Zeitvorgaben nutzbar bleibt.
 
 `demo.html` zeigt dieselben Kapitel im Beamermodus: Simulationen und Ausgaben sind gross dargestellt, Reflexionsfelder, Selbsttests und Zusatztexte ausgeblendet. Geeignet zum Vorführen von Obstexperiment, Regelchatbot und Token-Simulation im Plenum. Beide Seiten sind aus dem Materialmenü der Lernumgebung und aus der Fusszeile der Startseite erreichbar.
 
@@ -84,7 +84,7 @@ Browserdaten können gelöscht werden oder auf geteilten Geräten zugänglich bl
 - `KONZEPT.md`: Informationsarchitektur und didaktische Entscheidungen.
 - `unterrichtsideen.html`, `unterrichtsideen.css`, `unterrichtsideen.js`: Sammlung konkreter Unterrichtsideen mit Filtern und Einzeldruck.
 - `it2school.html`, `it2school.css`: erweitertes Angebot mit den sieben KI-Modulen von IT2School, eingeordnet für den Zyklus 3, mit vier Reihenvorschlägen. Nutzt zusätzlich `ablauf.css`.
-- `ablauf.html`, `ablauf.css`: Moderationsleitfaden für eine zweistündige Durchführung. Druckbar über den Browser.
+- `ablauf.html`, `ablauf.css`: Moderationsleitfaden für eine zweistündige Durchführung mit Folienverweisen. Druckbar über den Browser. Auf schmalen Bildschirmen ist die Übersichtstabelle kompakt, der Tabellenkasten per Tastatur scrollbar.
 - `demo.html`, `demo.css`: Beamermodus. Lädt dieselbe `app.js` und blendet aus, was nur am eigenen Gerät gebraucht wird.
 - `AILIT-ABGLEICH.md`: dokumentierter Abgleich mit der AILit-Originalpublikation.
 - `.nojekyll`: statische Auslieferung mit GitHub Pages.
@@ -120,7 +120,7 @@ Die beiden Kompetenzrahmen und ihre Progressionsstufen werden nicht gleichgesetz
 
 ## Prüfung und Grenzen
 
-JavaScript-Syntax und 437 Logik-/Strukturprüfungen wurden erfolgreich ausgeführt. Die Prüfungen decken unter anderem Kapitel-URLs, Zurück/Vorwärts, Wiederherstellung von Eingaben, ausgefallenen Browserspeicher, Löschen und Abbrechen, Dezimalgewichte, Diagrammskalierung, Tokenpfade, Selbsttests, Kartenzuordnung, Druckauswahl und Teachable-Machine-Reflexionen ab.
+JavaScript-Syntax und 495 Logik-/Strukturprüfungen wurden erfolgreich ausgeführt. Die Prüfungen decken unter anderem Kapitel-URLs, Zurück/Vorwärts, Wiederherstellung von Eingaben, ausgefallenen Browserspeicher, Löschen und Abbrechen, Dezimalgewichte, Diagrammskalierung, Tokenpfade, Selbsttests, Kartenzuordnung, Druckauswahl und Teachable-Machine-Reflexionen ab.
 
 Die Prüfungen sind als `checks.cjs` enthalten und können mit `node checks.cjs` erneut ausgeführt werden. Zusätzlich wurden die erzeugten Kapitel- und Druckinhalte auf eindeutige IDs, passende Formularbeschriftungen, Sprungmarken und lokale Links geprüft. Eine eigene Prüfung vergleicht die Versionskennungen an CSS und JavaScript mit dem tatsächlichen Dateiinhalt, damit nach einem Update keine veralteten Dateien ausgeliefert werden.
 
@@ -137,7 +137,7 @@ Quellen: Code.org/CodeAI, Soekia, Quick, Draw!, AI Unplugged (bereitgestellte Br
 
 `unterrichtsideen.css` ergänzt die vorhandene Gestaltung und die Druckansicht. `unterrichtsideen.js` steuert Filter und Einzeldruck; ohne JavaScript bleiben alle Ideen lesbar. Der AI-for-Oceans-Direkteinstieg zeigte beim Quellenabruf eine Zugangsmeldung. Kurs und Schulzugänge müssen vor Unterrichtseinsatz geprüft werden.
 
-Prüfung der Ergänzung: `node ideen-checks.cjs` prüft kombinierte Filter, Suche, leere Ergebnisse, Zurücksetzen, Wiederherstellung geöffneter Abschnitte nach dem Druck, eindeutige IDs und lokale Links. Diese Prüfung und die 437 Prüfungen aus `checks.cjs` sind erfolgreich. Die Seite wurde inzwischen auch in Chromium geladen und auf 1440 px und 360 px geprüft. Die externen interaktiven Angebote wurden inhaltlich recherchiert, nicht auf Schulgeräten durchgespielt.
+Prüfung der Ergänzung: `node ideen-checks.cjs` prüft kombinierte Filter, Suche, leere Ergebnisse, Zurücksetzen, Wiederherstellung geöffneter Abschnitte nach dem Druck, eindeutige IDs und lokale Links. Diese Prüfung und die 495 Prüfungen aus `checks.cjs` sind erfolgreich. Die Seite wurde inzwischen auch in Chromium geladen und auf 1440 px und 360 px geprüft. Die externen interaktiven Angebote wurden inhaltlich recherchiert, nicht auf Schulgeräten durchgespielt.
 
 «Mitgestalten» bezeichnet die begründete Entwicklung, Erprobung und Verbesserung von KI-Systemen oder ihrer Nutzung. Startseite, Kompetenzkompass und Modelleinsicht verwenden diesen konkreten Bezug. Die Modelleinsicht unterscheidet gemeinsame Nutzungsgestaltung nach Alles et al. von der systembezogenen Perspektive des AILit-Rahmens, die auch Kriterienbildung und Verbesserungsvorschläge ohne Programmierung umfasst.
 
