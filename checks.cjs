@@ -202,4 +202,13 @@ for(const[page,markup]of["unterrichtsideen.html","it2school.html","ablauf.html",
  assert(references.length>0,"versioned assets referenced in "+page);
  for(const[,file,key]of references)assert(key===assetHash(file),"cache key for "+file+" in "+page+" matches the file");
 }
+// The facilitation plan must add up to 120 minutes without gaps, and each phase card must match the overview.
+const plan=read("ablauf.html");
+const planRows=[...plan.matchAll(/<tr(?: class="break")?><td>(\d\d\d?)–(\d\d\d?)<\/td>/g)].map(m=>[+m[1],+m[2]]);
+assert(planRows.length===10,"overview lists ten time blocks");
+assert(planRows[0][0]===0&&planRows[planRows.length-1][1]===120,"overview runs from minute 0 to 120");
+for(let i=1;i<planRows.length;i++)assert(planRows[i][0]===planRows[i-1][1],"time block "+(i+1)+" starts where the previous one ends");
+const planCards=[...plan.matchAll(/class="phase-time">(\d\d\d?)–(\d\d\d?) Minuten/g)].map(m=>[+m[1],+m[2]]);
+assert(JSON.stringify(planCards)===JSON.stringify(planRows),"phase cards use the same times as the overview");
+assert([...plan.matchAll(/class="phase-time">[^<]*Folie/g)].length===10,"every phase names its slides");
 console.log(assertions+" logic and markup checks passed. Layout was additionally verified in Chromium; see README.");
