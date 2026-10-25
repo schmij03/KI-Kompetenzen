@@ -66,7 +66,7 @@ Acht Kapitel verbinden Experimente, Reflexion und Unterrichtsgestaltung. Die Kap
 
 ## Vorbereitung
 
-Zugänge vorab prüfen, ein Gerät pro Zweier- oder Dreiergruppe bereitstellen, Materialien und Post-its vorbereiten. Für die Quellenprüfung geeignete Lehrmittel oder Fachquellen bereithalten. Keine personenbezogenen Schülerdaten in die praktischen KI-Prompts eingeben. Bei fehlendem Zugang stehen Offline-Aufträge bereit; tatsächliches Prompting muss dann nachgeholt werden.
+Zugänge vorab prüfen, sicherstellen, dass jede Person ein eigenes Gerät hat, Materialien und Post-its vorbereiten. Für die Quellenprüfung geeignete Lehrmittel oder Fachquellen bereithalten. Keine personenbezogenen Schülerdaten in die praktischen KI-Prompts eingeben. Bei fehlendem Zugang stehen Offline-Aufträge bereit; tatsächliches Prompting muss dann nachgeholt werden.
 
 ## Daten
 
