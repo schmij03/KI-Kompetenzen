@@ -120,6 +120,7 @@ Browserdaten können gelöscht werden oder auf geteilten Geräten zugänglich bl
 - `lernen.html`: Grundgerüst der interaktiven Lernumgebung.
 - `app.js`: Inhalte, Simulationen, Formulare, Export, Druckmaterialien. Wird auch vom Beamermodus verwendet.
 - `styles.css`: Darstellung der Lernumgebung, gemeinsame Grundlagen, mobile Ansichten und A4-Druck.
+- `apple.css`: Gestaltungsschicht im Stil von Apple (neutrale Flächen, Glas-Navigation, Pill-Buttons, Verlaufsakzente). Wird auf allen Seiten zuletzt geladen und wirkt nur am Bildschirm; der A4-Druck bleibt unverändert.
 - `unterrichtsideen.html`, `unterrichtsideen.css`, `unterrichtsideen.js`: Sammlung der Unterrichtsideen mit Filtern und Einzeldruck.
 - `it2school.html`, `it2school.css`: IT2School-Module; nutzt zusätzlich `ablauf.css`.
 - `ablauf.html`, `ablauf.css`: Moderationsleitfaden. Auf schmalen Bildschirmen ist die Übersichtstabelle kompakt und per Tastatur scrollbar.
