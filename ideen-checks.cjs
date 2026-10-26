@@ -7,25 +7,25 @@ const classes=()=>{const s=new Set();return{add:x=>s.add(x),remove:x=>s.delete(x
 const nodes=new Map(),windowEvents={};
 function node(id){if(!nodes.has(id))nodes.set(id,{value:'',hidden:false,textContent:'',events:{},addEventListener(n,fn){this.events[n]=fn}});return nodes.get(id)}
 const cards=[...html.matchAll(/<article class="idea card" id="([^"]+)" data-subjects="([^"]+)" data-mode="([^"]+)" data-domains="([^"]+)">([\s\S]*?)<\/article>/g)].map(m=>({id:m[1],dataset:{subjects:m[2],mode:m[3],domains:m[4]},textContent:m[5].replace(/<[^>]*>/g,' '),hidden:false,classList:classes(),details:[{open:false}],querySelectorAll(){return this.details}}));
-assert.equal(cards.length,13);
+assert.equal(cards.length,19);
 cards.forEach(c=>nodes.set(c.id,c));
 const buttons=cards.map(card=>({dataset:{print:card.id},events:{},addEventListener(n,fn){this.events[n]=fn}}));
 const body={classList:classes()};let printCalls=0;
 vm.runInNewContext(script,{document:{body,getElementById:node,querySelectorAll:s=>s==='.idea'?cards:buttons},window:{addEventListener:(n,fn)=>windowEvents[n]=fn,print:()=>printCalls++}});
 const visible=()=>cards.filter(c=>!c.hidden).map(c=>c.id);
-assert.equal(visible().length,13);
+assert.equal(visible().length,19);
 node('mode').value='Ohne Geräte';node('domain').value='Mitgestalten';node('filters').events.change();
-assert.deepEqual(visible(),['baum','regeln']);
+assert.deepEqual(visible(),['baum','regeln','empfehlung','berufe','schulbot']);
 node('subject').value='Mathematik';node('filters').events.change();assert.deepEqual(visible(),['baum']);
-node('filters').events.reset();node('subject').value='Berufliche Orientierung';node('filters').events.change();assert.deepEqual(visible(),['regeln','trainingsdaten']);
-node('filters').events.reset();node('subject').value='Medien und Informatik';node('filters').events.change();assert.equal(visible().length,11);
+node('filters').events.reset();node('subject').value='Berufliche Orientierung';node('filters').events.change();assert.deepEqual(visible(),['regeln','trainingsdaten','berufe']);
+node('filters').events.reset();node('subject').value='Medien und Informatik';node('filters').events.change();assert.equal(visible().length,14);
 assert(!/Sek II/.test(html),'keine Verweise auf eine andere Stufe');
-assert.equal([...html.matchAll(/<span class="tag">Zyklus 3<\/span>/g)].length,13,'alle Ideen auf Zyklus 3');
+assert.equal([...html.matchAll(/<span class="tag">Zyklus 3<\/span>/g)].length,19,'alle Ideen auf Zyklus 3');
 node('search').value='zzzznichtvorhanden';node('filters').events.input();assert.equal(visible().length,0);assert.equal(node('empty').hidden,false);
-node('filters').events.reset();assert.equal(visible().length,13);assert.equal(node('empty').hidden,true);
+node('filters').events.reset();assert.equal(visible().length,19);assert.equal(node('empty').hidden,true);
 node('search').value='SOEKIA';node('filters').events.input();assert.deepEqual(visible(),['soekia']);
 node('filters').events.reset();node('search').value='goldfund';node('filters').events.input();assert.deepEqual(visible(),['goldrausch']);
-node('filters').events.reset();node('subject').value='Mathematik';node('filters').events.change();assert.deepEqual(visible(),['baum','spiel','goldrausch','pixel']);
+node('filters').events.reset();node('subject').value='Mathematik';node('filters').events.change();assert.deepEqual(visible(),['baum','spiel','goldrausch','pixel','energie']);
 node('filters').events.reset();node('search').value='chatgpt';node('filters').events.input();assert.deepEqual(visible(),['turing-heute']);
 node('filters').events.reset();cards[0].details[0].open=true;
 buttons[1].events.click();assert.equal(printCalls,1);assert.equal(body.classList.contains('print-one'),true);assert.equal(cards[1].classList.contains('print-target'),true);assert(cards.every(c=>c.details[0].open));
@@ -35,7 +35,7 @@ const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Se
 for(const m of html.matchAll(/href="\.\/([^"?#]+)(?:[?#][^"]*)?"/g))assert(fs.existsSync(path.join(__dirname,m[1])),m[1]);
 for(const m of html.matchAll(/href="#([^"]+)"/g))assert(ids.includes(m[1]),m[1]);
 for(const m of html.matchAll(/<article class="idea card" id="([^"]+)"[\s\S]*?<\/article>/g))assert(m[0].includes('href="./lernen.html?kapitel=7&amp;idee='+m[1]+'#meine-idee">Diese Idee für meinen Unterricht wählen'),'idea '+m[1]+' links to its own choice');
-assert.equal([...html.matchAll(/idee=([^"#&]+)#meine-idee/g)].length,13,'one choice link per idea');
+assert.equal([...html.matchAll(/idee=([^"#&]+)#meine-idee/g)].length,19,'one choice link per idea');
 // Idea 13 starts with a ready-made picture: the code must decode to the grid shown as solution.
 const css=fs.readFileSync(path.join(__dirname,'unterrichtsideen.css'),'utf8');
 const pixel=html.match(/<article class="idea card" id="pixel"[\s\S]*?<\/article>/)[0];
