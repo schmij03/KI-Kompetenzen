@@ -17,7 +17,7 @@ Online (nach Aktivierung von GitHub Pages): https://schmij03.github.io/KI-Kompet
 | Seite | Zweck |
 | --- | --- |
 | `index.html` | Startseite mit Einführung, Kompetenzperspektiven und Kapitelübersicht |
-| `lernen.html` | Lernumgebung mit acht Kapiteln; direkte Kapitelwahl über `?kapitel=0` bis `?kapitel=7` |
+| `lernen.html` | Lernumgebung mit acht Kapiteln; direkte Kapitelwahl über `?kapitel=0` bis `?kapitel=7`, Vorauswahl einer Unterrichtsidee über `?kapitel=7&idee=…` |
 | `unterrichtsideen.html` | Dreizehn Unterrichtsideen für den Zyklus 3 mit Filtern und Einzeldruck |
 | `it2school.html` | Erweitertes Angebot: die sieben KI-Module von IT2School als Unterrichtsreihen |
 | `ablauf.html` | Moderationsleitfaden für eine Weiterbildung von 120 Minuten in acht Phasen plus Pause |
@@ -90,7 +90,7 @@ Der Leitfaden umfasst Vorbereitung, eine Übersichtstabelle und acht Phasen plus
 | 10–30 | 2 · Was ist KI? (Input mit Abstimmen und Mitspielen, Beamermodus) | 1–3 | 7–17 |
 | 30–53 | 3 · Selber ausprobieren | 2–4 | 18–24 |
 | 53–60 | 4 · Chancen und Grenzen im Bildungsalltag | 5 | 25–26 |
-| 60–68 | Pause | – | 27 |
+| 60–68 | Pause | keines | 27 |
 | 68–83 | 5 · KI-Kompetenzen im Detail, mit Zuordnungsaktivität | 6 | 28–36 |
 | 83–106 | 6 · Kompetenzen anwenden, mit «Gruppe trifft Gruppe» | 6–8 | 37–43 |
 | 106–115 | 7 · Unterrichtsideen, mit Kurzversuch aus Idee 13 und Ideenwahl | Unterrichtsideen, IT2School | 44–48 |
@@ -98,7 +98,7 @@ Der Leitfaden umfasst Vorbereitung, eine Übersichtstabelle und acht Phasen plus
 
 Die Folien 50 bis 52 (INPUT, PICTS, Stufenmodell) sind ein Anhang und nicht Teil der 120 Minuten. `checks.cjs` gleicht Zeiten und Folien der Übersichtstabelle mit den Phasenkarten ab und prüft, dass die Zeiten lückenlos von 0 bis 120 reichen. Der Foliensatz selbst liegt nicht im Repository. Der Leitfaden liegt bewusst neben der Lernumgebung, damit diese selbst ohne Zeitvorgaben nutzbar bleibt.
 
-`demo.html` zeigt dieselben Kapitel im Beamermodus: Simulationen und Ausgaben sind gross dargestellt, Reflexionsfelder, Selbsttests und Zusatztexte ausgeblendet. Geeignet zum Vorführen von Obstexperiment, Regelchatbot und Token-Simulation im Plenum.
+`demo.html` zeigt dieselben Kapitel im Beamermodus: Simulationen und Ausgaben sind gross dargestellt, Reflexionsfelder, Selbsttests und Zusatztexte ausgeblendet. Geeignet zum Vorführen von Obstexperiment, Regelchatbot und Token-Simulation im Plenum. Die gekürzte Kompetenzmatrix in Kapitel 6 erscheint dort mit allen Teilkompetenzen und der Quellenangabe.
 
 ### Vorbereitung
 
@@ -112,7 +112,7 @@ Zugänge vorab prüfen, sicherstellen, dass jede Person ein eigenes Gerät hat, 
 
 Reflexionen, Canvas und Fortschritt bleiben im localStorage dieses Browsers. Sie werden nicht an einen Server gesendet. Es gibt kein Analytics, keine eingebettete KI und keine extern geladenen Schriften oder Skripte. Externe Links öffnen die jeweiligen Dienste.
 
-Browserdaten können gelöscht werden oder auf geteilten Geräten zugänglich bleiben. Das Lernjournal deshalb exportieren und Eingaben bei Bedarf über **Meine Eingaben löschen** entfernen. Das Löschen setzt Eingaben, Simulationen und Kapitel-URL zurück. Die Simulationszustände selbst werden nicht über einen Browserneustart hinweg gespeichert.
+Browserdaten können gelöscht werden oder auf geteilten Geräten zugänglich bleiben. Das Lernjournal deshalb exportieren und Eingaben bei Bedarf über **Meine Eingaben löschen** entfernen. Das Löschen setzt Eingaben, Simulationen und Kapitel-URL zurück, auch die gewählte Unterrichtsidee mit Klasse, Lernbeleg und Termin. Die Simulationszustände selbst werden nicht über einen Browserneustart hinweg gespeichert.
 
 ## Dateien
 
