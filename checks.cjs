@@ -205,10 +205,21 @@ for(const[page,markup]of["unterrichtsideen.html","it2school.html","ablauf.html",
 // The facilitation plan must add up to 120 minutes without gaps, and each phase card must match the overview.
 const plan=read("ablauf.html");
 const planRows=[...plan.matchAll(/<tr(?: class="break")?><td>(\d\d\d?)–(\d\d\d?)<\/td>/g)].map(m=>[+m[1],+m[2]]);
-assert(planRows.length===10,"overview lists ten time blocks");
+assert(planRows.length===9,"overview lists nine time blocks: eight phases and a break");
 assert(planRows[0][0]===0&&planRows[planRows.length-1][1]===120,"overview runs from minute 0 to 120");
 for(let i=1;i<planRows.length;i++)assert(planRows[i][0]===planRows[i-1][1],"time block "+(i+1)+" starts where the previous one ends");
 const planCards=[...plan.matchAll(/class="phase-time">(\d\d\d?)–(\d\d\d?) Minuten/g)].map(m=>[+m[1],+m[2]]);
 assert(JSON.stringify(planCards)===JSON.stringify(planRows),"phase cards use the same times as the overview");
-assert([...plan.matchAll(/class="phase-time">[^<]*Folie/g)].length===10,"every phase names its slides");
+assert([...plan.matchAll(/class="phase-time">[^<]*Folie/g)].length===9,"every phase names its slides");
+assert([...plan.matchAll(/<article class="card phase[^"]*" id="phase-/g)].length===9,"nine phase cards");
+// Slides in the overview and on the cards must agree, follow each other and stop before the appendix.
+const slideRange=text=>{const n=(text.match(/\d+/g)||[]).map(Number);return[n[0],n.at(-1)]};
+const overviewSlides=[...plan.matchAll(/<tr(?: class="break")?><td>[^<]*<\/td>(?:<td>[^<]*<\/td>){2}<td>([^<]*)<\/td>/g)].map(m=>slideRange(m[1]));
+const cardSlides=[...plan.matchAll(/class="phase-time">[^<]*?(Folien? [^<]*)<\/p>/g)].map(m=>slideRange(m[1]));
+assert(overviewSlides.length===9&&JSON.stringify(overviewSlides)===JSON.stringify(cardSlides),"phase cards name the same slides as the overview");
+assert(overviewSlides[0][0]===1&&overviewSlides.at(-1)[1]===45,"slides 1 to 45 belong to the 120 minutes");
+for(let i=1;i<overviewSlides.length;i++)assert(overviewSlides[i][0]===overviewSlides[i-1][1]+1,"slides of block "+(i+1)+" follow the previous block");
+assert(plan.includes("Folien 46 bis 48 (INPUT, PICTS, Stufenmodell)")&&!/Folien 28 bis 30/.test(plan),"appendix names slides 46 to 48");
+for(const phase of plan.match(/<article class="card phase" id="phase-\d"[\s\S]*?<\/article>/g))
+ for(const part of ["Sozialform","Vorne","Teilnehmende","Stolperstelle",'class="phase-goal"','class="say"'])assert(phase.includes(part),"phase card names "+part);
 console.log(assertions+" logic and markup checks passed. Layout was additionally verified in Chromium; see README.");

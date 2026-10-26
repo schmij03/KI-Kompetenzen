@@ -31,7 +31,7 @@ Ruhige Arbeitsoberfläche mit dunkler petrolfarbener Typografie, warmem Hintergr
 
 ## Bewusste didaktische Entscheidungen
 
-- Am Einstieg erscheinen die vier Bereiche nur als Selbsteinschätzung. Die theoretische Einordnung erfolgt nach Experimenten und Kartensortierung.
+- Erleben vor Einordnen: Am Einstieg erscheinen die vier Bereiche nur als Selbsteinschätzung. In der geleiteten Weiterbildung werden sie nach dem Input zu KI und dem eigenen Ausprobieren erklärt (Phase 5) und danach angewendet (Phase 6). Im Selbststudium bleibt die offene Kartensortierung vor der Modelleinsicht möglich.
 - Für das Obstexperiment ist der Algorithmus explizit definiert. Bei widersprüchlichen gleich nahen Beispielen wird keine Scheinsicherheit erzeugt.
 - Das Nächster-Nachbar-Verfahren passt keine neuronalen Parameter an. Dieser Unterschied wird sichtbar erklärt.
 - Die Token-Simulation verwendet erfundene Verteilungen und von Hand definierte Übergänge. Sie demonstriert schrittweise Auswahl, nicht die Berechnung eines echten Sprachmodells. Ihr vereinfachter Kontext wird ausdrücklich benannt.
@@ -52,9 +52,27 @@ Druckpaket: Kompass, Experimentprotokoll, Prompting-Aufträge, Prüftabelle, zw�
 
 ## Durchführung in 120 Minuten
 
-Der Moderationsleitfaden liegt als eigene Seite neben der Lernumgebung, nicht in den Kapiteln. So bleibt die Lernumgebung ohne Zeitvorgaben nutzbar, während eine geleitete Durchführung trotzdem einen belastbaren Ablauf hat. Die neun Phasen decken nicht jedes Kapitel vollständig ab; der Canvas wird begonnen und danach selbstständig fertiggestellt. Der Beamermodus lädt dieselbe Inhaltsquelle und blendet aus, was nur am eigenen Gerät gebraucht wird. Dadurch kann keine zweite, abweichende Fassung der Simulationen entstehen.
+Der Moderationsleitfaden liegt als eigene Seite neben der Lernumgebung, nicht in den Kapiteln. So bleibt die Lernumgebung ohne Zeitvorgaben nutzbar, während eine geleitete Durchführung trotzdem einen belastbaren Ablauf hat. Er folgt dem Foliensatz v5 in acht Phasen plus Pause:
+
+| Zeit | Phase | Kapitel |
+| --- | --- | --- |
+| 0–10 | 1 · Ankommen und Standort | 1 |
+| 10–30 | 2 · Was ist KI? Input mit Vorführung im Beamermodus | 1–3 |
+| 30–55 | 3 · Selber ausprobieren: Obstexperiment, Token-Simulation, Prompting, Prüffragen | 2–4 |
+| 55–60 | 4 · Erkenntnisse sichern | 5 |
+| 60–68 | Pause | – |
+| 68–83 | 5 · KI-Kompetenzen im Detail: Kreismodell, Niveaustufen, Teilkompetenzen | 6 |
+| 83–106 | 6 · Kompetenzen anwenden: Karten zuordnen, Aufgabe verbessern, Canvas beginnen | 6–8 |
+| 106–115 | 7 · Unterrichtsideen | Unterrichtsideen, IT2School |
+| 115–120 | 8 · Abschluss | 8 |
+
+Der Bogen führt vom Erklären über das eigene Ausprobieren zum Modell: Das Kompetenzmodell wird erst vorgestellt, wenn alle eigene Erfahrungen haben, an denen sich die Bereiche festmachen lassen. Die Phasen decken nicht jedes Kapitel vollständig ab; der Canvas wird begonnen und danach selbstständig fertiggestellt. Der Beamermodus lädt dieselbe Inhaltsquelle und blendet aus, was nur am eigenen Gerät gebraucht wird. Dadurch kann keine zweite, abweichende Fassung der Simulationen entstehen.
 
 Die Einstiegsübung «KI oder nicht KI» ersetzt eine statische Aufzählung. Zwei der sechs Fälle sind bewusst nicht entscheidbar: Die Erkenntnis, dass eine Oberfläche das Verfahren meistens nicht verrät, ist der Lerninhalt. Es gibt deshalb keine Punktzahl und keine Richtig-falsch-Rückmeldung, sondern eine Einordnung mit Begründung.
+
+## Grundlage Kompetenzmodell
+
+Susanne Alles, Joscha Falck, Manuel Flick und Regina Schulz (2025): «KI-Kompetenzen für Lehrende und Lernende». VK:KIWA. DOI [10.5281/zenodo.15047793](https://doi.org/10.5281/zenodo.15047793), Lizenz CC BY 4.0. Der DLH Zürich stellt das Modell im WB-Kompass vor; es ist kein Modell der PH Zürich. Karten, Kurzbeschreibungen und Beispiele der Lernumgebung sind eigene didaktische Bearbeitungen.
 
 ## Zielstufe
 
