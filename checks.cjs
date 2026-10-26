@@ -22,7 +22,7 @@ function harness(saved=null,search="",options={}){
   pushState(data,title,url){if(options.historyFails)throw Error("History blocked");historyEntries.splice(++position);historyEntries[position]=url;window.location=new URL(url)},
   replaceState(data,title,url){if(options.historyFails)throw Error("History blocked");historyEntries[position]=url;window.location=new URL(url)}
  };
- const expose="\nreturn {get state(){return state},pages,chapterView,actions,fruitGuess,fruitDomain,fruitTicks,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,render,go,markDone,matrix,matrixCycle,matrixLevels,matrixHTML,sortMode,areaSummaryHTML};";
+ const expose="\nreturn {get state(){return state},pages,chapterView,actions,fruitGuess,fruitDomain,fruitTicks,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,render,go,markDone,matrix,matrixCycle,matrixLevels,matrixHTML,sortMode,areaSummaryHTML,ideaChoices,ideaLabels};";
  const api=new Function("document","localStorage","window","confirm",source+expose)(document,localStorage,window,()=>options.confirmClear!==false);
  return{api,node,events,windowEvents,window,saved:()=>stored,writes:()=>writes,
  back(){if(position>0){window.location=new URL(historyEntries[--position]);(windowEvents.popstate||[]).forEach(fn=>fn())}},
@@ -266,6 +266,39 @@ assert(!openReview.pages[5]().includes('data-key="geuebt0"'),"open sorting keeps
 openReview.put("modelOpen",true);assert(openReview.pages[5]().includes('data-key="geuebt0"'),"open sorting shows the review after the comparison");
 const badReview=harness(JSON.stringify({answers:{geuebt0:"7",geuebt1:"3",geuebtOpen:"ja"},chapter:5,done:[]})).api;
 assert(badReview.val("geuebt0")===""&&badReview.val("geuebtOpen")===""&&badReview.val("geuebt1")==="3","invalid review values removed, valid kept");
+// Chapter 7 exchange and chapter 8 idea choice.
+const exchange=harness(null,"?kapitel=6");
+let exchangePage=exchange.api.pages[6]();
+assert(exchangePage.includes("Gruppe trifft Gruppe")&&exchangePage.includes("Partnerprüfungsfrage")&&exchangePage.includes('data-key="austausch"'),"chapter 7 offers the group exchange");
+assert(exchangePage.indexOf('data-key="partnercheck"')<exchangePage.indexOf("Gruppe trifft Gruppe"),"exchange follows the improvement grid");
+exchange.api.put("austausch","Lernbeleg ohne KI ergänzen");
+assert(exchange.api.journalText().includes("Aus dem Austausch übernommen\nLernbeleg ohne KI ergänzen"),"exchange reaches the journal");
+const readFile=f=>fs.readFileSync(require("node:path").join(__dirname,f),"utf8");
+const ideasHtml=readFile("unterrichtsideen.html");
+const ideaCards=[...ideasHtml.matchAll(/<article class="idea card" id="([^"]+)"[\s\S]*?<div class="idea-number">UNTERRICHTSIDEE (\d\d)<\/div><h2>([^<]+)<\/h2>/g)].map(m=>[m[1],m[2]+" · "+m[3]]);
+assert(ideaCards.length===13&&JSON.stringify(ideaCards)===JSON.stringify(api.ideaChoices[0][1]),"idea choices match the thirteen lesson ideas");
+const series=[...readFile("it2school.html").matchAll(/<h3>([^<]+)<\/h3>/g)].slice(0,4).map(m=>m[1]);
+assert(api.ideaChoices[1][1].every(([,label],i)=>label.endsWith(series[i])),"series choices match the IT2School page");
+const choosing=harness(null,"?kapitel=7&idee=pixel");
+assert(choosing.api.val("ideewahl")==="pixel"&&choosing.api.state.chapter===7,"idea link preselects the idea");
+assert(!choosing.window.location.search.includes("idee"),"idea parameter is removed after use");
+let ideaPage=choosing.api.pages[7]();
+assert(ideaPage.includes('id="meine-idee"')&&ideaPage.includes('value="pixel" selected')&&ideaPage.indexOf("Meine Idee für den Unterricht")<ideaPage.indexOf("Kompetenzkompass & Exit"),"idea card precedes the exit ticket");
+for(const key of ["ideeklasse","ideebeleg","ideetermin"])assert(ideaPage.includes('data-key="'+key+'"')&&ideaPage.includes('<label for="'+key+'">'),"labelled idea field "+key);
+choosing.api.put("ideeklasse","2. Sek, Mathematik");choosing.api.put("ideebeleg","Codiertes Bild");choosing.api.put("ideetermin","nach den Herbstferien");
+const ideaJournal=choosing.api.journalText();
+assert(ideaJournal.includes("Meine Idee für den Unterricht\n13 · Pixel, Zahlen, Bilderkennung")&&ideaJournal.includes("Meine Idee: Klasse und Fach\n2. Sek, Mathematik")&&ideaJournal.includes("nach den Herbstferien"),"idea reaches the journal");
+const kept=harness(choosing.saved(),"?kapitel=7&idee=regeln");
+assert(kept.api.val("ideewahl")==="pixel","idea link does not overwrite an earlier choice");
+assert(kept.api.pages[7]().includes("hat sie nicht überschrieben"),"overwrite protection is explained");
+assert(harness(null,"?kapitel=7&idee=unsinn").api.val("ideewahl")==="","unknown idea links are ignored");
+assert(harness(JSON.stringify({answers:{ideewahl:"unsinn",ideeklasse:"bleibt"},chapter:7,done:[]})).api.val("ideewahl")==="","invalid stored idea removed");
+const exitSheet=api.materialsHTML().slice(api.materialsHTML().indexOf("<h1>Exit-Ticket</h1>"));
+assert(exitSheet.includes("Meine Idee für den Unterricht")&&exitSheet.includes("Termin für die Erprobung")&&exitSheet.includes("Geplanter Lernbeleg"),"exit ticket print includes the idea");
+choosing.api.actions.canvas();
+assert(choosing.node("paper").innerHTML.includes("13 · Pixel, Zahlen, Bilderkennung")&&choosing.node("paper").innerHTML.includes("nach den Herbstferien"),"personal print includes the chosen idea");
+choosing.api.actions.clear();
+assert(choosing.api.val("ideewahl")===""&&choosing.api.val("ideetermin")===""&&!choosing.saved().includes("pixel"),"clearing removes the idea");
 // The projection view reuses app.js, so it has to keep the elements app.js writes into.
 const demo=fs.readFileSync(require("node:path").join(__dirname,"demo.html"),"utf8");
 for(const id of ["nav","main","progress","progressText","paper"])assert(demo.includes('id="'+id+'"'),"projection view keeps #"+id+" for app.js");

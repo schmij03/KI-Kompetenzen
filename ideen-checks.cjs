@@ -34,4 +34,6 @@ windowEvents.beforeprint();assert(cards.every(c=>c.details[0].open));windowEvent
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
 for(const m of html.matchAll(/href="\.\/([^"?#]+)(?:[?#][^"]*)?"/g))assert(fs.existsSync(path.join(__dirname,m[1])),m[1]);
 for(const m of html.matchAll(/href="#([^"]+)"/g))assert(ids.includes(m[1]),m[1]);
+for(const m of html.matchAll(/<article class="idea card" id="([^"]+)"[\s\S]*?<\/article>/g))assert(m[0].includes('href="./lernen.html?kapitel=7&amp;idee='+m[1]+'#meine-idee">Diese Idee für meinen Unterricht wählen'),'idea '+m[1]+' links to its own choice');
+assert.equal([...html.matchAll(/idee=([^"#&]+)#meine-idee/g)].length,13,'one choice link per idea');
 console.log('Unterrichtsideen: combined filters, search, empty/reset states, print restoration, IDs and local links passed.');
