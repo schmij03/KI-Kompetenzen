@@ -60,7 +60,7 @@ Acht Kapitel verbinden Experimente, Reflexion und Unterrichtsgestaltung. Die Kap
 
 ## Für die Kursleitung
 
-`ablauf.html` enthält einen Moderationsleitfaden für 120 Minuten: Vorbereitung, neun Phasen mit Sozialform, Übergangssätzen, Stolperstellen und Verweisen auf die Folien des begleitenden Foliensatzes sowie Vorschläge zum Kürzen und Erweitern. Die Zeiten der Übersichtstabelle und der Phasenkarten werden von `checks.cjs` abgeglichen. Der Foliensatz selbst liegt nicht im Repository. Der Leitfaden liegt bewusst neben der Lernumgebung, damit diese selbst ohne Zeitvorgaben nutzbar bleibt.
+`ablauf.html` enthält einen Moderationsleitfaden für 120 Minuten: Vorbereitung, neun Phasen mit Sozialform, Übergangssätzen, Stolperstellen und Verweisen auf die Folien des begleitenden Foliensatzes sowie Vorschläge zum Kürzen und Erweitern. In den Phasen 3 und 4 probieren die Teilnehmenden zuerst externe Angebote aus (Quick, Draw! und das Soekia-Sprachmodell), danach folgen die eigenen Experimente der Lernumgebung, die bei fehlendem Internet als Reserve dienen. Die Zeiten der Übersichtstabelle und der Phasenkarten werden von `checks.cjs` abgeglichen. Der Foliensatz selbst liegt nicht im Repository. Der Leitfaden liegt bewusst neben der Lernumgebung, damit diese selbst ohne Zeitvorgaben nutzbar bleibt.
 
 `demo.html` zeigt dieselben Kapitel im Beamermodus: Simulationen und Ausgaben sind gross dargestellt, Reflexionsfelder, Selbsttests und Zusatztexte ausgeblendet. Geeignet zum Vorführen von Obstexperiment, Regelchatbot und Token-Simulation im Plenum. Beide Seiten sind aus dem Materialmenü der Lernumgebung und aus der Fusszeile der Startseite erreichbar.
 
