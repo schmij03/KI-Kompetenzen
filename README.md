@@ -18,7 +18,7 @@ Online (nach Aktivierung von GitHub Pages): https://schmij03.github.io/KI-Kompet
 | --- | --- |
 | `index.html` | Startseite mit Einführung, Kompetenzperspektiven und Kapitelübersicht |
 | `lernen.html` | Lernumgebung mit acht Kapiteln; direkte Kapitelwahl über `?kapitel=0` bis `?kapitel=7`, Vorauswahl einer Unterrichtsidee über `?kapitel=7&idee=…` |
-| `unterrichtsideen.html` | Dreizehn Unterrichtsideen für den Zyklus 3 mit Filtern und Einzeldruck |
+| `unterrichtsideen.html` | Neunzehn Unterrichtsideen für den Zyklus 3 mit Filtern und Einzeldruck |
 | `it2school.html` | Erweitertes Angebot: die sieben KI-Module von IT2School als Unterrichtsreihen |
 | `ablauf.html` | Moderationsleitfaden für eine Weiterbildung von 120 Minuten in acht Phasen plus Pause |
 | `demo.html` | Beamermodus der Kapitel für das Plenum |
@@ -53,7 +53,7 @@ Acht Kapitel verbinden Experimente, Reflexion und Unterrichtsgestaltung. Sie las
 - Zwölf Kompetenzkarten in zwei Varianten: offen in vier selbst benannte Gruppen sortieren (für das Selbststudium, mit nachträglicher Modelleinsicht) oder direkt den vier Bereichen zuordnen und je eine Niveaustufe I, II oder III schätzen. Eigene Gruppennamen und der Vergleich mit dem möglichen Schwerpunkt aktualisieren sich unmittelbar; die Eingaben beider Varianten bleiben erhalten.
 - Gekürzte Originalmatrix des Kompetenzmodells: Kreismodell mit AI Leadership im Zentrum, Übergänge zwischen den Bereichen, Niveaustufen I bis III und ausklappbare Teilkompetenzen je Bereich, mit Quellenangabe. Auch als Druckblatt.
 - Sechs Unterrichtsaufgaben mit Verbesserungsvorschlägen. Die Aufgabenwahl übernimmt den Ausgangsauftrag ins Raster und bewahrt eigene Überarbeitungen. Danach der Austausch «Gruppe trifft Gruppe» mit Partnerprüfungsfrage und einem Feld für die übernommene Änderung.
-- Ausfüllbarer KI-Kompetenz-Canvas mit Beispiel und Fragen zur Qualität der Lernbelege, dazu Gallery Walk, «Meine Idee für den Unterricht» (Auswahl aus den dreizehn Unterrichtsideen, den vier IT2School-Reihen oder der eigenen Aktivität, mit Klasse, Lernbeleg und Termin) und Exit-Ticket.
+- Ausfüllbarer KI-Kompetenz-Canvas mit Beispiel und Fragen zur Qualität der Lernbelege, dazu Gallery Walk, «Meine Idee für den Unterricht» (Auswahl aus den neunzehn Unterrichtsideen, den vier IT2School-Reihen oder der eigenen Aktivität, mit Klasse, Lernbeleg und Termin) und Exit-Ticket.
 - Druckbare Arbeitsmaterialien und Export des persönlichen Lernjournals als Textdatei.
 
 ### Bedienung
@@ -66,11 +66,13 @@ Acht Kapitel verbinden Experimente, Reflexion und Unterrichtsgestaltung. Sie las
 
 ## Unterrichtsideen
 
-`unterrichtsideen.html` ergänzt den Lernweg um dreizehn konkrete Aktivitäten für den Zyklus 3 mit Lernzielen, Vorbereitung, Zeitvorschlägen, Abläufen, Differenzierung, Kompetenzbezügen und Lernbelegen. Filter nach Stichwort, Fach, Ausstattung und Kompetenz helfen bei der Auswahl. Differenziert wird über Grundanspruch und erweiterte Anforderung innerhalb der Sek I, nicht über Verweise auf Nachbarstufen. Jede Idee lässt sich einzeln drucken. Die Verlinkung zum Canvas öffnet die Planung, ohne vorhandene Eingaben zu überschreiben. Der Link «Diese Idee für meinen Unterricht wählen» öffnet Kapitel 8 und wählt die Idee vor, sofern dort noch keine Idee gewählt ist. Idee 13 «Pixel, Zahlen, Bilderkennung» enthält ein fertiges Einstiegsbild (Zahlencode und leeres 7×7-Raster, Lösung aufklappbar), das auch im Einzeldruck erscheint. Ohne JavaScript bleiben alle Ideen lesbar.
+`unterrichtsideen.html` ergänzt den Lernweg um neunzehn konkrete Aktivitäten für den Zyklus 3 mit Lernzielen, Vorbereitung, Zeitvorschlägen, Abläufen, Differenzierung, Kompetenzbezügen und Lernbelegen. Filter nach Stichwort, Fach, Ausstattung und Kompetenz helfen bei der Auswahl. Differenziert wird über Grundanspruch und erweiterte Anforderung innerhalb der Sek I, nicht über Verweise auf Nachbarstufen. Jede Idee lässt sich einzeln drucken. Die Verlinkung zum Canvas öffnet die Planung, ohne vorhandene Eingaben zu überschreiben. Der Link «Diese Idee für meinen Unterricht wählen» öffnet Kapitel 8 und wählt die Idee vor, sofern dort noch keine Idee gewählt ist. Idee 13 «Pixel, Zahlen, Bilderkennung» enthält ein fertiges Einstiegsbild (Zahlencode und leeres 7×7-Raster, Lösung aufklappbar), das auch im Einzeldruck erscheint. Ohne JavaScript bleiben alle Ideen lesbar.
 
 Die Ideen bauen auf AI for Oceans (Code.org), Quick, Draw!, Soekia, AI Unplugged und IT2School auf. Originalmaterialien werden verlinkt; die Abläufe sind eigene Adaptionen für den Zyklus 3. Wo Originalangebote sich an eine breitere Altersspanne richten, wurden Anspruch, Auswertung und Lernbeleg angepasst. Fachzuordnungen und Zeitbudgets sind eigene Planungsvorschläge.
 
 Aus IT2School abgeleitet sind unter anderem «Goldrausch: Gruppen finden ohne Etiketten» (unüberwachtes Lernen, KI-B3.5), «Wenn Trainingsdaten die Vergangenheit fortschreiben» (Verzerrungen, KI-B4.4), «Turing-Test damals und heute» (Zusatzmaterial KI-B2.2.3) und «Pixel, Zahlen, Bilderkennung» (Nächster-Nachbar-Vergleich nach KI-A3).
+
+Die Ideen 14 bis 19 sind eigene Unterrichtsideen ohne externes Originalmaterial und stärken Bereiche, die vorher selten vorkamen: Bildherkunft prüfen (Bildnerisches Gestalten), ein gespieltes Empfehlungssystem mit eigener Regel, KI-Feedback zu eigenen Texten begründet annehmen oder ablehnen, Tätigkeiten im Wunschberuf einordnen (Berufliche Orientierung), Angaben zum Energiebedarf von KI vergleichen sowie einen regelbasierten Auskunftsbot für das Schulhaus entwerfen. Drei davon setzen den Schwerpunkt auf Mitgestalten.
 
 ## IT2School-Module
 

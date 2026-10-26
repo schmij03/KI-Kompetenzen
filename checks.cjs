@@ -276,7 +276,7 @@ assert(exchange.api.journalText().includes("Aus dem Austausch übernommen\nLernb
 const readFile=f=>fs.readFileSync(require("node:path").join(__dirname,f),"utf8");
 const ideasHtml=readFile("unterrichtsideen.html");
 const ideaCards=[...ideasHtml.matchAll(/<article class="idea card" id="([^"]+)"[\s\S]*?<div class="idea-number">UNTERRICHTSIDEE (\d\d)<\/div><h2>([^<]+)<\/h2>/g)].map(m=>[m[1],m[2]+" · "+m[3]]);
-assert(ideaCards.length===13&&JSON.stringify(ideaCards)===JSON.stringify(api.ideaChoices[0][1]),"idea choices match the thirteen lesson ideas");
+assert(ideaCards.length===19&&JSON.stringify(ideaCards)===JSON.stringify(api.ideaChoices[0][1]),"idea choices match the nineteen lesson ideas");
 const series=[...readFile("it2school.html").matchAll(/<h3>([^<]+)<\/h3>/g)].slice(0,4).map(m=>m[1]);
 assert(api.ideaChoices[1][1].every(([,label],i)=>label.endsWith(series[i])),"series choices match the IT2School page");
 const choosing=harness(null,"?kapitel=7&idee=pixel");
