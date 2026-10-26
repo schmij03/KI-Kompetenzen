@@ -34,4 +34,25 @@ windowEvents.beforeprint();assert(cards.every(c=>c.details[0].open));windowEvent
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
 for(const m of html.matchAll(/href="\.\/([^"?#]+)(?:[?#][^"]*)?"/g))assert(fs.existsSync(path.join(__dirname,m[1])),m[1]);
 for(const m of html.matchAll(/href="#([^"]+)"/g))assert(ids.includes(m[1]),m[1]);
+for(const m of html.matchAll(/<article class="idea card" id="([^"]+)"[\s\S]*?<\/article>/g))assert(m[0].includes('href="./lernen.html?kapitel=7&amp;idee='+m[1]+'#meine-idee">Diese Idee für meinen Unterricht wählen'),'idea '+m[1]+' links to its own choice');
+assert.equal([...html.matchAll(/idee=([^"#&]+)#meine-idee/g)].length,13,'one choice link per idea');
+// Idea 13 starts with a ready-made picture: the code must decode to the grid shown as solution.
+const css=fs.readFileSync(path.join(__dirname,'unterrichtsideen.css'),'utf8');
+const pixel=html.match(/<article class="idea card" id="pixel"[\s\S]*?<\/article>/)[0];
+const start=pixel.match(/<details class="pixel-start">[\s\S]*<\/details>/)[0];
+const code=[...start.match(/<table class="pixel-code">[\s\S]*?<\/table>/)[0].matchAll(/<tr><td>(\d)<\/td><td>([\d, ]+)<\/td><\/tr>/g)].map(m=>m[2].split(', ').map(Number));
+assert.deepEqual(code,[[1,2,1,2,1],[0,7],[0,7],[1,5,1],[2,3,2],[3,1,3],[7]],'code of the starting picture');
+const decode=row=>row.flatMap((n,i)=>Array(n).fill(i%2===1));
+assert(code.every(row=>decode(row).length===7),'every row describes seven squares');
+const grids=[...start.matchAll(/<table class="pixel-grid( solved)?"[^>]*>([\s\S]*?)<\/table>/g)];
+assert.equal(grids.length,2,'blank grid and solution');
+const cells=g=>[...g.matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map(r=>[...r[1].matchAll(/<td( class="on")?><\/td>/g)].map(c=>!!c[1]));
+const blank=cells(grids[0][2]),solved=cells(grids[1][2]);
+assert(!grids[0][1]&&blank.length===7&&blank.every(r=>r.length===7&&r.every(c=>!c)),'blank 7x7 grid');
+assert(grids[1][1]&&JSON.stringify(solved)===JSON.stringify(code.map(decode)),'solution matches the code');
+assert(solved[1].every(Boolean)&&solved[6].every(c=>!c)&&solved[5].filter(Boolean).length===1,'solution is the heart');
+assert(/<details class="pixel-solution"><summary>Lösung anzeigen<\/summary>/.test(start)&&start.indexOf('pixel-solution')>start.indexOf('class="pixel-grid"'),'solution stays folded below the blank grid');
+assert(/@media print\{[^}]*\.idea details\.pixel-solution\{display:none!important\}/.test(css),'single print shows code and blank grid but not the solution');
+assert(/role="img" aria-label="Leeres Raster/.test(start)&&/aria-label="Lösung: ein Herz/.test(start),'grids are labelled');
+assert(/eine 0 heisst, die Zeile beginnt schwarz/.test(start),'rule explains the leading zero');
 console.log('Unterrichtsideen: combined filters, search, empty/reset states, print restoration, IDs and local links passed.');

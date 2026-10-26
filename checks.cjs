@@ -22,7 +22,7 @@ function harness(saved=null,search="",options={}){
   pushState(data,title,url){if(options.historyFails)throw Error("History blocked");historyEntries.splice(++position);historyEntries[position]=url;window.location=new URL(url)},
   replaceState(data,title,url){if(options.historyFails)throw Error("History blocked");historyEntries[position]=url;window.location=new URL(url)}
  };
- const expose="\nreturn {get state(){return state},pages,chapterView,actions,fruitGuess,fruitDomain,fruitTicks,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,render,go,markDone};";
+ const expose="\nreturn {get state(){return state},pages,chapterView,actions,fruitGuess,fruitDomain,fruitTicks,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,render,go,markDone,matrix,matrixCycle,matrixLevels,matrixHTML,sortMode,areaSummaryHTML,ideaChoices,ideaLabels};";
  const api=new Function("document","localStorage","window","confirm",source+expose)(document,localStorage,window,()=>options.confirmClear!==false);
  return{api,node,events,windowEvents,window,saved:()=>stored,writes:()=>writes,
  back(){if(position>0){window.location=new URL(historyEntries[--position]);(windowEvents.popstate||[]).forEach(fn=>fn())}},
@@ -184,6 +184,121 @@ api.put("group1","Quellen prüfen");api.put("sort0","1");api.put("tm_test","Stif
 assert(api.journalText().includes("Quellen prüfen"),"journal includes group names");
 assert(api.journalText().includes("Teachable Machine:")&&api.journalText().includes("Stift auf dunklem Papier"),"optional task exported");
 assert(api.materialsHTML().includes("Zusatzaufgabe · Teachable Machine"),"optional task printable");
+// Chapter 6 offers open sorting (default, keeps existing data) and direct assignment to the four domains.
+const sorting=harness(JSON.stringify({answers:{group1:"Unsere Daten",sort0:"1",sortbegruendung:"Alt"},chapter:5,done:[]}),"?kapitel=5");
+assert(sorting.api.sortMode()==="offen","open sorting stays the default for existing data");
+let sortPage=sorting.api.pages[5]();
+assert(sortPage.includes('data-key="group1"')&&!sortPage.includes('data-key="area0"'),"open mode shows own groups");
+assert(!sortPage.includes("Das Kompetenzmodell im Detail"),"open mode keeps the matrix back until the comparison");
+assert(sortPage.includes('aria-pressed="true"')&&sortPage.includes('data-action="setSortMode"'),"mode switch announces the active mode");
+sorting.api.actions.setSortMode({dataset:{mode:"bereiche"}});
+assert(sorting.api.sortMode()==="bereiche"&&sorting.saved().includes('"sortMode":"bereiche"'),"chosen mode is stored");
+sortPage=sorting.api.pages[5]();
+assert((sortPage.match(/data-key="area\d+"/g)||[]).length===12&&(sortPage.match(/data-key="stufe\d+"/g)||[]).length===12,"each card gets a domain and a level");
+assert(sortPage.includes("Das Kompetenzmodell im Detail")&&!sortPage.includes('data-key="group1"'),"domain mode shows the matrix instead of own groups");
+sorting.api.actions.setSortMode({dataset:{mode:"unsinn"}});
+assert(sorting.api.sortMode()==="bereiche","unknown modes are ignored");
+assert(sorting.api.val("group1")==="Unsere Daten"&&sorting.api.val("sort0")==="1"&&sorting.api.val("sortbegruendung")==="Alt","switching modes keeps open sorting");
+sorting.api.actions.revealAreas();
+assert(sorting.node("areaStatus").textContent.includes("alle zwölf")&&!sorting.api.val("areaOpen"),"comparison needs every card assigned");
+const focus=[2,0,3,1,2,0,3,1,0,3,1,2];for(let i=0;i<12;i++)sorting.api.put("area"+i,String(focus[i]+1));
+sorting.api.put("stufe0","II");
+sorting.api.actions.revealAreas();
+assert(sorting.api.val("areaOpen")===true,"complete assignment opens the comparison");
+assert(sorting.api.areaSummaryHTML().includes("Bei 12 von 12 Karten"),"comparison counts matches with the possible focus");
+assert(sorting.api.areaSummaryHTML().includes("Stufe II")&&sorting.api.areaSummaryHTML().includes("Stufe offen"),"comparison shows estimated and open levels");
+sorting.api.put("area0","4");
+assert(sorting.node("areaSummary").innerHTML.includes("Bei 11 von 12 Karten")&&sorting.node("areaSummary").innerHTML.includes("(abweichend)"),"comparison updates live");
+assert(sorting.api.areaSummaryHTML().includes("keine Musterlösung"),"levels get no model answer");
+sortPage=sorting.api.chapterView();
+const sortIds=[...sortPage.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+assert(sortIds.length===new Set(sortIds).size,"unique IDs in domain mode");
+for(const m of sortPage.matchAll(/data-action="([^"]+)"/g))assert(typeof sorting.api.actions[m[1]]==="function","valid action in domain mode "+m[1]);
+assert((sortPage.match(/class="card matrix"/g)||[]).length===1,"matrix appears once in domain mode");
+assert(!/\bMinuten\b|\d+\s*Min\b/.test(sortPage),"no workshop timing in domain mode");
+assert(sorting.api.journalText().includes("Bereich für Karte 1: ")&&sorting.api.journalText().includes("\nMitgestalten"),"journal names the chosen domain");
+assert(sorting.api.journalText().includes("Niveaustufe für Karte 1: ")&&sorting.api.journalText().includes("\nII"),"journal names the estimated level");
+const reloadedSorting=harness(sorting.saved(),"?kapitel=5").api;
+assert(reloadedSorting.sortMode()==="bereiche"&&reloadedSorting.val("area0")==="4"&&reloadedSorting.val("stufe0")==="II"&&reloadedSorting.val("group1")==="Unsere Daten","both modes survive a reload");
+const badSorting=harness(JSON.stringify({answers:{sortMode:"alles",area0:"5",area1:"2",stufe0:"IV",stufe1:"III",areaOpen:"ja",sort0:"2"},chapter:5,done:[]})).api;
+assert(badSorting.val("sortMode")===""&&badSorting.val("area0")===""&&badSorting.val("stufe0")===""&&badSorting.val("areaOpen")==="","invalid domain-mode values removed");
+assert(badSorting.val("area1")==="2"&&badSorting.val("stufe1")==="III"&&badSorting.val("sort0")==="2","valid domain-mode values kept");
+// The shortened matrix: four domains with three levels each, a closed cycle and an attributed source.
+assert(api.matrix.map(d=>d.domain).join()==="Verstehen,Anwenden,Reflektieren,Mitgestalten","matrix follows the four domains");
+assert(api.matrix.every(d=>d.focus&&d.levels.length===3&&d.levels.every(l=>l.length>=3&&l.every(t=>typeof t==="string"&&t.length>10))),"every domain describes levels I to III");
+assert(api.matrixLevels.map(l=>l.join(" ")).join()==="I Basis,II Vertiefung,III Expertise","levels are named");
+assert(api.matrixCycle.every((t,i)=>t[1]===api.matrixCycle[(i+1)%4][0]&&t[2].includes(" / ")),"transitions close the circle");
+const matrixMarkup=api.matrixHTML();
+for(const part of ["AI Leadership","Lernen über, mit, durch, trotz und ohne KI","keine Klassenstufen","keine Zuordnung zu I bis III","AILit","10.5281/zenodo.15047793","CC BY 4.0","Gekürzt","Susanne Alles, Joscha Falck, Manuel Flick und Regina Schulz"])assert(matrixMarkup.includes(part),"matrix names "+part);
+assert((matrixMarkup.match(/<details class="matrix-domain/g)||[]).length===4,"one expandable section per domain");
+assert(matrixMarkup.includes('role="img"')&&matrixMarkup.includes("<title"),"cycle diagram is labelled");
+api.put("modelOpen",true);api.state.chapter=5;
+assert(api.pages[5]().includes("Das Kompetenzmodell im Detail"),"open mode shows the matrix after the comparison");
+const printed=api.materialsHTML();
+assert(printed.includes("Den vier Bereichen zuordnen:")&&printed.includes("Niveaustufe I, II oder III"),"card sheets explain the second mode");
+assert(printed.includes("Kompetenzmatrix (gekürzt)")&&printed.includes("10.5281/zenodo.15047793")&&printed.includes("Expertise"),"matrix is printable with its source");
+assert((printed.match(/<strong>Karte \d+<\/strong>/g)||[]).length===12,"still 12 printable cards");
+assert(!/\bMinuten\b|\d+\s*Min\b/.test(printed),"no timing in extended print materials");
+// Chapter 5 weighs chances and limits; the old field keys keep stored notes.
+const school=harness(JSON.stringify({answers:{kann:"Alt gespeichert",nicht:"N",mensch:"M"},chapter:4,done:[]}),"?kapitel=4");
+let schoolPage=school.api.pages[4]();
+assert(school.api.val("kann")==="Alt gespeichert"&&schoolPage.includes("Alt gespeichert"),"existing chapter 5 notes stay visible");
+for(const part of ["Im Schulalltag hilft KI bei …","Nicht verlassen kann ich mich auf …","Deshalb bleibt bei mir …","Chancen und Grenzen im Bildungsalltag","Material differenzieren","Feedback vorbereiten","Lernende unterstützen","Ideen und Perspektiven","Darum macht der Mensch",'data-key="chancegrenze"'])assert(schoolPage.includes(part),"chapter 5 shows "+part);
+assert(!schoolPage.includes("KI kann gut"),"old sentence starters replaced");
+school.api.put("chancegrenze","Differenzieren, aber fachlich prüfen");
+assert(school.api.journalText().includes("Im Schulalltag hilft KI bei\nAlt gespeichert")&&school.api.journalText().includes("Eine Chance für meinen Unterricht und ihre Grenze\nDifferenzieren"),"chapter 5 reaches the journal");
+assert(api.materialsHTML().includes("Chancen und Grenzen im Bildungsalltag")&&api.materialsHTML().includes("Schülerdaten gehören nicht in Prompts")&&api.materialsHTML().includes("Deshalb bleibt bei mir"),"chances overview is printable");
+school.api.state.chapter=4;assert(school.api.chapterView().includes("Chance für deinen Unterricht"),"chapter 5 goal names chances");
+// Activity review: eight activities, a resolution without score, Mitgestalten named as missing.
+const review=harness(JSON.stringify({answers:{sortMode:"bereiche"},chapter:5,done:[]}),"?kapitel=5");
+let reviewPage=review.api.pages[5]();
+assert((reviewPage.match(/data-key="geuebt\d"/g)||[]).length===8,"eight activities to assign");
+assert(!reviewPage.includes("Mögliche Zuordnung")&&reviewPage.includes('data-action="revealPractised"'),"resolution stays hidden first");
+review.api.put("geuebt0","2");review.api.actions.revealPractised();
+reviewPage=review.api.pages[5]();
+assert((reviewPage.match(/Mögliche Zuordnung: /g)||[]).length===8,"resolution for every activity");
+assert(reviewPage.includes("Mögliche Zuordnung: Verstehen")&&reviewPage.includes("Mögliche Zuordnung: Anwenden")&&reviewPage.includes("Mögliche Zuordnung: Reflektieren")&&!reviewPage.includes("Mögliche Zuordnung: Mitgestalten"),"resolution uses three domains");
+assert(reviewPage.includes("Mitgestalten kam kaum vor")&&reviewPage.includes("Kapitel 7 und 8")&&reviewPage.includes("Mehrere Zuordnungen sind begründbar"),"resolution names the missing domain");
+assert(!/\d+ von 8|Punkte/.test(reviewPage),"activity review has no score");
+assert(review.api.val("geuebt0")==="2"&&review.api.journalText().includes("Heute geübt: Systeme als feste Regeln oder aus Daten gelernt einordnen\nAnwenden"),"activity choice kept and exported");
+const openReview=harness(JSON.stringify({answers:{},chapter:5,done:[]}),"?kapitel=5").api;
+assert(!openReview.pages[5]().includes('data-key="geuebt0"'),"open sorting keeps the model and the review back");
+openReview.put("modelOpen",true);assert(openReview.pages[5]().includes('data-key="geuebt0"'),"open sorting shows the review after the comparison");
+const badReview=harness(JSON.stringify({answers:{geuebt0:"7",geuebt1:"3",geuebtOpen:"ja"},chapter:5,done:[]})).api;
+assert(badReview.val("geuebt0")===""&&badReview.val("geuebtOpen")===""&&badReview.val("geuebt1")==="3","invalid review values removed, valid kept");
+// Chapter 7 exchange and chapter 8 idea choice.
+const exchange=harness(null,"?kapitel=6");
+let exchangePage=exchange.api.pages[6]();
+assert(exchangePage.includes("Gruppe trifft Gruppe")&&exchangePage.includes("Partnerprüfungsfrage")&&exchangePage.includes('data-key="austausch"'),"chapter 7 offers the group exchange");
+assert(exchangePage.indexOf('data-key="partnercheck"')<exchangePage.indexOf("Gruppe trifft Gruppe"),"exchange follows the improvement grid");
+exchange.api.put("austausch","Lernbeleg ohne KI ergänzen");
+assert(exchange.api.journalText().includes("Aus dem Austausch übernommen\nLernbeleg ohne KI ergänzen"),"exchange reaches the journal");
+const readFile=f=>fs.readFileSync(require("node:path").join(__dirname,f),"utf8");
+const ideasHtml=readFile("unterrichtsideen.html");
+const ideaCards=[...ideasHtml.matchAll(/<article class="idea card" id="([^"]+)"[\s\S]*?<div class="idea-number">UNTERRICHTSIDEE (\d\d)<\/div><h2>([^<]+)<\/h2>/g)].map(m=>[m[1],m[2]+" · "+m[3]]);
+assert(ideaCards.length===13&&JSON.stringify(ideaCards)===JSON.stringify(api.ideaChoices[0][1]),"idea choices match the thirteen lesson ideas");
+const series=[...readFile("it2school.html").matchAll(/<h3>([^<]+)<\/h3>/g)].slice(0,4).map(m=>m[1]);
+assert(api.ideaChoices[1][1].every(([,label],i)=>label.endsWith(series[i])),"series choices match the IT2School page");
+const choosing=harness(null,"?kapitel=7&idee=pixel");
+assert(choosing.api.val("ideewahl")==="pixel"&&choosing.api.state.chapter===7,"idea link preselects the idea");
+assert(!choosing.window.location.search.includes("idee"),"idea parameter is removed after use");
+let ideaPage=choosing.api.pages[7]();
+assert(ideaPage.includes('id="meine-idee"')&&ideaPage.includes('value="pixel" selected')&&ideaPage.indexOf("Meine Idee für den Unterricht")<ideaPage.indexOf("Kompetenzkompass & Exit"),"idea card precedes the exit ticket");
+for(const key of ["ideeklasse","ideebeleg","ideetermin"])assert(ideaPage.includes('data-key="'+key+'"')&&ideaPage.includes('<label for="'+key+'">'),"labelled idea field "+key);
+choosing.api.put("ideeklasse","2. Sek, Mathematik");choosing.api.put("ideebeleg","Codiertes Bild");choosing.api.put("ideetermin","nach den Herbstferien");
+const ideaJournal=choosing.api.journalText();
+assert(ideaJournal.includes("Meine Idee für den Unterricht\n13 · Pixel, Zahlen, Bilderkennung")&&ideaJournal.includes("Meine Idee: Klasse und Fach\n2. Sek, Mathematik")&&ideaJournal.includes("nach den Herbstferien"),"idea reaches the journal");
+const kept=harness(choosing.saved(),"?kapitel=7&idee=regeln");
+assert(kept.api.val("ideewahl")==="pixel","idea link does not overwrite an earlier choice");
+assert(kept.api.pages[7]().includes("hat sie nicht überschrieben"),"overwrite protection is explained");
+assert(harness(null,"?kapitel=7&idee=unsinn").api.val("ideewahl")==="","unknown idea links are ignored");
+assert(harness(JSON.stringify({answers:{ideewahl:"unsinn",ideeklasse:"bleibt"},chapter:7,done:[]})).api.val("ideewahl")==="","invalid stored idea removed");
+const exitSheet=api.materialsHTML().slice(api.materialsHTML().indexOf("<h1>Exit-Ticket</h1>"));
+assert(exitSheet.includes("Meine Idee für den Unterricht")&&exitSheet.includes("Termin für die Erprobung")&&exitSheet.includes("Geplanter Lernbeleg"),"exit ticket print includes the idea");
+choosing.api.actions.canvas();
+assert(choosing.node("paper").innerHTML.includes("13 · Pixel, Zahlen, Bilderkennung")&&choosing.node("paper").innerHTML.includes("nach den Herbstferien"),"personal print includes the chosen idea");
+choosing.api.actions.clear();
+assert(choosing.api.val("ideewahl")===""&&choosing.api.val("ideetermin")===""&&!choosing.saved().includes("pixel"),"clearing removes the idea");
 // The projection view reuses app.js, so it has to keep the elements app.js writes into.
 const demo=fs.readFileSync(require("node:path").join(__dirname,"demo.html"),"utf8");
 for(const id of ["nav","main","progress","progressText","paper"])assert(demo.includes('id="'+id+'"'),"projection view keeps #"+id+" for app.js");
@@ -205,10 +320,22 @@ for(const[page,markup]of["unterrichtsideen.html","it2school.html","ablauf.html",
 // The facilitation plan must add up to 120 minutes without gaps, and each phase card must match the overview.
 const plan=read("ablauf.html");
 const planRows=[...plan.matchAll(/<tr(?: class="break")?><td>(\d\d\d?)–(\d\d\d?)<\/td>/g)].map(m=>[+m[1],+m[2]]);
-assert(planRows.length===10,"overview lists ten time blocks");
+assert(planRows.length===9,"overview lists nine time blocks: eight phases and a break");
 assert(planRows[0][0]===0&&planRows[planRows.length-1][1]===120,"overview runs from minute 0 to 120");
 for(let i=1;i<planRows.length;i++)assert(planRows[i][0]===planRows[i-1][1],"time block "+(i+1)+" starts where the previous one ends");
 const planCards=[...plan.matchAll(/class="phase-time">(\d\d\d?)–(\d\d\d?) Minuten/g)].map(m=>[+m[1],+m[2]]);
 assert(JSON.stringify(planCards)===JSON.stringify(planRows),"phase cards use the same times as the overview");
-assert([...plan.matchAll(/class="phase-time">[^<]*Folie/g)].length===10,"every phase names its slides");
+assert([...plan.matchAll(/class="phase-time">[^<]*Folie/g)].length===9,"every phase names its slides");
+assert([...plan.matchAll(/<article class="card phase[^"]*" id="phase-/g)].length===9,"nine phase cards");
+// Slides in the overview and on the cards must agree, follow each other and stop before the appendix.
+const slideRange=text=>{const n=(text.match(/\d+/g)||[]).map(Number);return[n[0],n.at(-1)]};
+const overviewSlides=[...plan.matchAll(/<tr(?: class="break")?><td>[^<]*<\/td>(?:<td>[^<]*<\/td>){2}<td>([^<]*)<\/td>/g)].map(m=>slideRange(m[1]));
+const cardSlides=[...plan.matchAll(/class="phase-time">[^<]*?(Folien? [^<]*)<\/p>/g)].map(m=>slideRange(m[1]));
+assert(overviewSlides.length===9&&JSON.stringify(overviewSlides)===JSON.stringify(cardSlides),"phase cards name the same slides as the overview");
+assert(overviewSlides[0][0]===1&&overviewSlides.at(-1)[1]===49,"slides 1 to 49 belong to the 120 minutes");
+for(let i=1;i<overviewSlides.length;i++)assert(overviewSlides[i][0]===overviewSlides[i-1][1]+1,"slides of block "+(i+1)+" follow the previous block");
+assert(plan.includes("Folien 50 bis 52 (INPUT, PICTS, Stufenmodell)")&&!/Folien (28 bis 30|46 bis 48)/.test(plan),"appendix names slides 50 to 52");
+for(const phase of plan.match(/<article class="card phase" id="phase-\d"[\s\S]*?<\/article>/g))
+ for(const part of ["Sozialform","Vorne","Teilnehmende","Stolperstelle",'class="phase-goal"','class="say"'])assert(phase.includes(part),"phase card names "+part);
+for(const part of ["Gruppe trifft Gruppe","Partnerprüfungsfrage","7×7-Raster","Kurzversuch"])assert(plan.includes(part),"plan describes "+part);
 console.log(assertions+" logic and markup checks passed. Layout was additionally verified in Chromium; see README.");

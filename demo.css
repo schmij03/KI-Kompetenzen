@@ -25,6 +25,10 @@
  body.demo .optional,
  body.demo p.small{display:none!important}
 
+ /* The competence matrix stays readable and attributed when projected. */
+ body.demo .matrix details{display:block!important}
+ body.demo .matrix p.small{display:block!important}
+
  body.demo .chapter-hero{padding:1.4rem 2rem;margin-bottom:1rem;border-radius:16px}
  body.demo .chapter-hero .eyebrow{margin-bottom:.5rem;font-size:.7rem}
  body.demo h1{font-size:clamp(2.2rem,3.4vw,3rem);margin-bottom:0;max-width:none}
