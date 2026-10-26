@@ -22,7 +22,7 @@ function harness(saved=null,search="",options={}){
   pushState(data,title,url){if(options.historyFails)throw Error("History blocked");historyEntries.splice(++position);historyEntries[position]=url;window.location=new URL(url)},
   replaceState(data,title,url){if(options.historyFails)throw Error("History blocked");historyEntries[position]=url;window.location=new URL(url)}
  };
- const expose="\nreturn {get state(){return state},pages,chapterView,actions,fruitGuess,fruitDomain,fruitTicks,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,render,go,markDone};";
+ const expose="\nreturn {get state(){return state},pages,chapterView,actions,fruitGuess,fruitDomain,fruitTicks,baseFruit,updateFruit,addFruit,undoFruit,resetFruit,tokenDistribution,tokenOptions,chooseToken,resetTokens,nextToken,tokenText,optionsNow,updateRules,put,val,quizzes,quizHTML,quizFeedback,checkQuiz,chooseTask,refreshGroupNames,journalText,materialsHTML,canvasPaper,render,go,markDone,matrix,matrixCycle,matrixLevels,matrixHTML,sortMode,areaSummaryHTML};";
  const api=new Function("document","localStorage","window","confirm",source+expose)(document,localStorage,window,()=>options.confirmClear!==false);
  return{api,node,events,windowEvents,window,saved:()=>stored,writes:()=>writes,
  back(){if(position>0){window.location=new URL(historyEntries[--position]);(windowEvents.popstate||[]).forEach(fn=>fn())}},
@@ -184,6 +184,61 @@ api.put("group1","Quellen prüfen");api.put("sort0","1");api.put("tm_test","Stif
 assert(api.journalText().includes("Quellen prüfen"),"journal includes group names");
 assert(api.journalText().includes("Teachable Machine:")&&api.journalText().includes("Stift auf dunklem Papier"),"optional task exported");
 assert(api.materialsHTML().includes("Zusatzaufgabe · Teachable Machine"),"optional task printable");
+// Chapter 6 offers open sorting (default, keeps existing data) and direct assignment to the four domains.
+const sorting=harness(JSON.stringify({answers:{group1:"Unsere Daten",sort0:"1",sortbegruendung:"Alt"},chapter:5,done:[]}),"?kapitel=5");
+assert(sorting.api.sortMode()==="offen","open sorting stays the default for existing data");
+let sortPage=sorting.api.pages[5]();
+assert(sortPage.includes('data-key="group1"')&&!sortPage.includes('data-key="area0"'),"open mode shows own groups");
+assert(!sortPage.includes("Das Kompetenzmodell im Detail"),"open mode keeps the matrix back until the comparison");
+assert(sortPage.includes('aria-pressed="true"')&&sortPage.includes('data-action="setSortMode"'),"mode switch announces the active mode");
+sorting.api.actions.setSortMode({dataset:{mode:"bereiche"}});
+assert(sorting.api.sortMode()==="bereiche"&&sorting.saved().includes('"sortMode":"bereiche"'),"chosen mode is stored");
+sortPage=sorting.api.pages[5]();
+assert((sortPage.match(/data-key="area\d+"/g)||[]).length===12&&(sortPage.match(/data-key="stufe\d+"/g)||[]).length===12,"each card gets a domain and a level");
+assert(sortPage.includes("Das Kompetenzmodell im Detail")&&!sortPage.includes('data-key="group1"'),"domain mode shows the matrix instead of own groups");
+sorting.api.actions.setSortMode({dataset:{mode:"unsinn"}});
+assert(sorting.api.sortMode()==="bereiche","unknown modes are ignored");
+assert(sorting.api.val("group1")==="Unsere Daten"&&sorting.api.val("sort0")==="1"&&sorting.api.val("sortbegruendung")==="Alt","switching modes keeps open sorting");
+sorting.api.actions.revealAreas();
+assert(sorting.node("areaStatus").textContent.includes("alle zwölf")&&!sorting.api.val("areaOpen"),"comparison needs every card assigned");
+const focus=[2,0,3,1,2,0,3,1,0,3,1,2];for(let i=0;i<12;i++)sorting.api.put("area"+i,String(focus[i]+1));
+sorting.api.put("stufe0","II");
+sorting.api.actions.revealAreas();
+assert(sorting.api.val("areaOpen")===true,"complete assignment opens the comparison");
+assert(sorting.api.areaSummaryHTML().includes("Bei 12 von 12 Karten"),"comparison counts matches with the possible focus");
+assert(sorting.api.areaSummaryHTML().includes("Stufe II")&&sorting.api.areaSummaryHTML().includes("Stufe offen"),"comparison shows estimated and open levels");
+sorting.api.put("area0","4");
+assert(sorting.node("areaSummary").innerHTML.includes("Bei 11 von 12 Karten")&&sorting.node("areaSummary").innerHTML.includes("(abweichend)"),"comparison updates live");
+assert(sorting.api.areaSummaryHTML().includes("keine Musterlösung"),"levels get no model answer");
+sortPage=sorting.api.chapterView();
+const sortIds=[...sortPage.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+assert(sortIds.length===new Set(sortIds).size,"unique IDs in domain mode");
+for(const m of sortPage.matchAll(/data-action="([^"]+)"/g))assert(typeof sorting.api.actions[m[1]]==="function","valid action in domain mode "+m[1]);
+assert((sortPage.match(/class="card matrix"/g)||[]).length===1,"matrix appears once in domain mode");
+assert(!/\bMinuten\b|\d+\s*Min\b/.test(sortPage),"no workshop timing in domain mode");
+assert(sorting.api.journalText().includes("Bereich für Karte 1: ")&&sorting.api.journalText().includes("\nMitgestalten"),"journal names the chosen domain");
+assert(sorting.api.journalText().includes("Niveaustufe für Karte 1: ")&&sorting.api.journalText().includes("\nII"),"journal names the estimated level");
+const reloadedSorting=harness(sorting.saved(),"?kapitel=5").api;
+assert(reloadedSorting.sortMode()==="bereiche"&&reloadedSorting.val("area0")==="4"&&reloadedSorting.val("stufe0")==="II"&&reloadedSorting.val("group1")==="Unsere Daten","both modes survive a reload");
+const badSorting=harness(JSON.stringify({answers:{sortMode:"alles",area0:"5",area1:"2",stufe0:"IV",stufe1:"III",areaOpen:"ja",sort0:"2"},chapter:5,done:[]})).api;
+assert(badSorting.val("sortMode")===""&&badSorting.val("area0")===""&&badSorting.val("stufe0")===""&&badSorting.val("areaOpen")==="","invalid domain-mode values removed");
+assert(badSorting.val("area1")==="2"&&badSorting.val("stufe1")==="III"&&badSorting.val("sort0")==="2","valid domain-mode values kept");
+// The shortened matrix: four domains with three levels each, a closed cycle and an attributed source.
+assert(api.matrix.map(d=>d.domain).join()==="Verstehen,Anwenden,Reflektieren,Mitgestalten","matrix follows the four domains");
+assert(api.matrix.every(d=>d.focus&&d.levels.length===3&&d.levels.every(l=>l.length>=3&&l.every(t=>typeof t==="string"&&t.length>10))),"every domain describes levels I to III");
+assert(api.matrixLevels.map(l=>l.join(" ")).join()==="I Basis,II Vertiefung,III Expertise","levels are named");
+assert(api.matrixCycle.every((t,i)=>t[1]===api.matrixCycle[(i+1)%4][0]&&t[2].includes(" / ")),"transitions close the circle");
+const matrixMarkup=api.matrixHTML();
+for(const part of ["AI Leadership","Lernen über, mit, durch, trotz und ohne KI","keine Klassenstufen","keine Zuordnung zu I bis III","AILit","10.5281/zenodo.15047793","CC BY 4.0","Gekürzt","Susanne Alles, Joscha Falck, Manuel Flick und Regina Schulz"])assert(matrixMarkup.includes(part),"matrix names "+part);
+assert((matrixMarkup.match(/<details class="matrix-domain/g)||[]).length===4,"one expandable section per domain");
+assert(matrixMarkup.includes('role="img"')&&matrixMarkup.includes("<title"),"cycle diagram is labelled");
+api.put("modelOpen",true);api.state.chapter=5;
+assert(api.pages[5]().includes("Das Kompetenzmodell im Detail"),"open mode shows the matrix after the comparison");
+const printed=api.materialsHTML();
+assert(printed.includes("Den vier Bereichen zuordnen:")&&printed.includes("Niveaustufe I, II oder III"),"card sheets explain the second mode");
+assert(printed.includes("Kompetenzmatrix (gekürzt)")&&printed.includes("10.5281/zenodo.15047793")&&printed.includes("Expertise"),"matrix is printable with its source");
+assert((printed.match(/<strong>Karte \d+<\/strong>/g)||[]).length===12,"still 12 printable cards");
+assert(!/\bMinuten\b|\d+\s*Min\b/.test(printed),"no timing in extended print materials");
 // The projection view reuses app.js, so it has to keep the elements app.js writes into.
 const demo=fs.readFileSync(require("node:path").join(__dirname,"demo.html"),"utf8");
 for(const id of ["nav","main","progress","progressText","paper"])assert(demo.includes('id="'+id+'"'),"projection view keeps #"+id+" for app.js");

@@ -21,7 +21,7 @@ Die Startseite führt mit einem kurzen Lernversprechen, vier Kompetenzperspektiv
 | Sprachmodelle verstehen | Regeln anwenden und Fortsetzungen untersuchen | Training und Nutzung in eigenen Worten unterscheiden |
 | Prompting ausprobieren | Fobizz/Gemini nutzen und Ergebnisse vergleichen | Promptvergleich plus Aussageprüfung oder Perspektivenanalyse |
 | Erkenntnisse & Grenzen | Drei Satzanfänge vervollständigen | Begründete menschliche Prüfentscheidung |
-| Kompetenzen entdecken | Zwölf Karten sortieren, dann Modell vergleichen | Zuordnung mit beobachtbarer Handlung |
+| Kompetenzen entdecken | Zwölf Karten offen sortieren oder den vier Bereichen mit Niveaustufe zuordnen, dann mit Modell und Matrix vergleichen | Zuordnung mit beobachtbarer Handlung |
 | Aufgaben verbessern | Eine Unterrichtsaufgabe überarbeiten | Arbeitsauftrag mit zwei belegbaren Bereichen |
 | Unterricht gestalten | Canvas erstellen, Feedback einholen, überarbeiten | Eigenes Szenario, Revision und Transferabsicht |
 
@@ -38,7 +38,8 @@ Ruhige Arbeitsoberfläche mit dunkler petrolfarbener Typografie, warmem Hintergr
 - Training und Nutzung sind getrennte Prozesse. Die Tokenschätzung ist keine Schätzung von Wahrheit.
 - Prompting bietet drei frei wählbare Aufträge zu Kontext, Quellenprüfung und Perspektiven.
 - Nicht jeder KI-Einsatz bildet automatisch alle vier Bereiche. Fachliches Verständnis ist nicht automatisch Verständnis der KI-Funktionsweise.
-- Niveaustufen werden anhand der Originalmatrix begründet, nicht aus Selbsteinschätzung oder Promptlänge abgeleitet.
+- Niveaustufen werden anhand der Originalmatrix begründet, nicht aus Selbsteinschätzung oder Promptlänge abgeleitet. Kapitel 6 enthält dafür eine gekürzte Matrix mit Kreismodell, Übergängen und Teilkompetenzen je Bereich. I bis III sind keine Klassenstufen.
+- Kapitel 6 bietet zwei Sortiervarianten. Die offene Sortierung in selbst benannte Gruppen zeigt die Matrix erst nach dem Vergleich und eignet sich für das Selbststudium. Die direkte Zuordnung zu den vier Bereichen mit geschätzter Niveaustufe setzt das Modell voraus und dient Phase 6 der Weiterbildung. Für die Niveaustufen gibt es keine Musterlösung, weil die Karten Handlungen ohne Unterrichtskontext beschreiben. Die offene Sortierung bleibt Standard, damit gespeicherte Eingaben unverändert erscheinen.
 - Der AILit-Rahmen wird als ergänzende Perspektive geführt, nicht als zweites Raster zum Ausfüllen. Seine drei Progressionsstufen bleiben von den Niveaus I–III getrennt, weil die Publikation sie ausdrücklich nicht an Altersgruppen oder Klassenstufen bindet.
 - Der Ressourcenverbrauch von KI erscheint als Prüffrage vor dem Übernehmen eines Outputs, nicht als eigenes Umweltkapitel. Die Entscheidung über den Einsatz bleibt damit dort, wo sie im Ablauf ohnehin getroffen wird.
 - Gallery Walk enthält eine verbindliche Überarbeitung.
@@ -48,7 +49,7 @@ Ruhige Arbeitsoberfläche mit dunkler petrolfarbener Typografie, warmem Hintergr
 
 Die zentrale Inhaltsquelle ist app.js. Daraus werden Webseite, ausfüllbare und leere Druckvorlagen erzeugt. Dadurch bleiben Karten und Arbeitsaufträge konsistent.
 
-Druckpaket: Kompass, Experimentprotokoll, Prompting-Aufträge, Prüftabelle, zwölf Karten, sechs Aufgaben, Verbesserungsraster, zweiseitiger Canvas, Feedbackkarten, Exit-Ticket und Quellen.
+Druckpaket: Kompass, Experimentprotokoll, Prompting-Aufträge, Prüftabelle, zwölf Karten mit Anleitung für beide Sortiervarianten, gekürzte Kompetenzmatrix, sechs Aufgaben, Verbesserungsraster, zweiseitiger Canvas, Feedbackkarten, Exit-Ticket und Quellen.
 
 ## Durchführung in 120 Minuten
 

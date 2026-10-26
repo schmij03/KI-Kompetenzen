@@ -187,3 +187,28 @@ textarea{min-height:100px;line-height:1.55}
  .printfield>strong{display:block;break-after:avoid}
  .sheet{overflow-wrap:anywhere}
 }
+
+/* Chapter 6: two sorting modes and the shortened competence matrix. */
+@media screen {
+ .mode-switch{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:.8rem;margin:1.2rem 0 .4rem}
+ .mode-switch button{display:grid;gap:.3rem;align-content:start;text-align:left;padding:1rem 1.1rem;line-height:1.45}
+ .mode-switch button span{font-weight:400;font-size:.82rem}
+ .matrix-intro{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:1.6rem;align-items:center;margin-bottom:1rem}
+ .cycle{display:block;width:100%;max-width:300px;height:auto;margin:auto}
+ .cycle text{font-family:system-ui,sans-serif}
+ .matrix-cycle{padding-left:1.2rem;margin:0}
+ .matrix-cycle li{margin:.3rem 0}
+ .matrix-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
+ .matrix-levels p{margin:0;padding:.7rem .9rem;border:1px solid var(--line);border-radius:10px;background:#f7f9f4}
+ .matrix-domain{border:1px solid var(--line);border-left:4px solid var(--v);border-radius:12px;padding:.1rem 1rem;margin:.7rem 0}
+ .matrix-domain.m1{border-left-color:var(--a)}
+ .matrix-domain.m2{border-left-color:var(--r)}
+ .matrix-domain.m3{border-left-color:var(--m)}
+ .matrix-level ul{margin:.2rem 0 .9rem;padding-left:1.2rem}
+ .area-compare{list-style:none;padding:0;margin:1rem 0}
+ .area-compare li{padding:.7rem 0;border-bottom:1px solid var(--line)}
+}
+@media screen and (max-width:850px){
+ .matrix-intro{grid-template-columns:1fr}
+ .matrix-levels{grid-template-columns:1fr}
+}
